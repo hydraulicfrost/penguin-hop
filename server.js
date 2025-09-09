@@ -5,13 +5,13 @@ const crypto = require('crypto');
 const http = require('http');
 const WebSocket = require('ws');
 
-// Configuration
-const MARKETJS_SECRET = 'your-shared-secret-with-marketjs';
-const PORT = 3001;
+// Configuration - Using environment variables for security
+const MARKETJS_SECRET = process.env.MARKETJS_SECRET || 'dev-secret-change-in-production';
+const PORT = process.env.PORT || 3001;
 
 // Abstract testnet configuration
 const ABSTRACT_RPC_URL = 'https://api.testnet.abs.xyz';
-const NFT_CONTRACT_ADDRESS = '0x70071362bCBc37C49cDCBC2112ad71215e2fd90D';
+const NFT_CONTRACT_ADDRESS = process.env.NFT_CONTRACT_ADDRESS || '0x70071362bCBc37C49cDCBC2112ad71215e2fd90D';
 const CHAIN_ID = 11124;
 
 const app = express();
@@ -26,7 +26,7 @@ app.use(cors({
     'http://localhost:3001',  
     'http://127.0.0.1:3001',  
     'http://localhost:3000',  
-    'http://127.0.0.1:3000',  
+    'http://127.0.0.1:3000',
     'https://coco-and-bridge.marketjs-cloud2.com'
   ],
   credentials: true
@@ -294,12 +294,12 @@ app.get('/api/leaderboard', (req, res) => {
 });
 
 // Start server with WebSocket support
-server.listen(PORT, '127.0.0.1', () => {
-  console.log(`Server running on http://127.0.0.1:${PORT}`);
-  console.log(`WebSocket server running on ws://127.0.0.1:${PORT}`);
+server.listen(PORT, '0.0.0.0', () => {
+  console.log(`Server running on port ${PORT}`);
+  console.log(`WebSocket server running on port ${PORT}`);
   console.log(`NFT verification enabled for contract: ${NFT_CONTRACT_ADDRESS}`);
   console.log(`Network: Abstract testnet (Chain ID: ${CHAIN_ID})`);
-  console.log(`Make sure to share this secret with MarketJS: ${MARKETJS_SECRET}`);
+  console.log(`MarketJS authentication configured`);
 });
 
 console.log('Connected to SQLite database.');
