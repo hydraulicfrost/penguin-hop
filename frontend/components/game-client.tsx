@@ -12,11 +12,11 @@ function LoginButton() {
   const { login, logout } = useLoginWithAbstract()
   const { address, isConnected } = useAccount()
   const [isLoading, setIsLoading] = useState(false)
-  const [gameSession, setGameSession] = useState(null)
-  const [leaderboard, setLeaderboard] = useState([])
+  const [gameSession, setGameSession] = useState<any>(null)
+  const [leaderboard, setLeaderboard] = useState<any[]>([])
   const [showLeaderboard, setShowLeaderboard] = useState(false)
   const [isConnectedToWS, setIsConnectedToWS] = useState(false)
-  const wsRef = useRef(null)
+  const wsRef = useRef<WebSocket | null>(null)
 
   useEffect(() => {
     console.log('Account state changed:', { address, isConnected })
