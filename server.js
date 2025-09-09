@@ -117,8 +117,9 @@ db.serialize(() => {
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP
   )`);
   
-  // Game sessions table
-  db.run(`CREATE TABLE IF NOT EXISTS game_sessions (
+  // Game sessions table - recreate with correct schema
+  db.run(`DROP TABLE IF EXISTS game_sessions`);
+  db.run(`CREATE TABLE game_sessions (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     tournament_id TEXT UNIQUE NOT NULL,
     user_id TEXT NOT NULL,
