@@ -191,7 +191,7 @@ function LoginButton() {
             <div className="bg-gray-800 rounded-lg p-4 text-center">
               <p className="text-green-400 mb-2">Connected to Abstract Global Wallet</p>
               <p className="text-sm text-gray-300">
-                {formatAddress(address)}
+                {formatAddress(address || '')}
               </p>
             </div>
             
@@ -325,7 +325,7 @@ function LoginButton() {
                               {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : index + 1}
                             </td>
                             <td className="py-2">
-                              {entry.user_id === address ? 'You' : formatAddress(entry.user_id)}
+                              {entry.user_id === (address || '') ? 'You' : formatAddress(entry.user_id)}
                             </td>
                             <td className="py-2 font-bold text-green-400">{entry.best_score}</td>
                             <td className="py-2">{entry.time}s</td>
