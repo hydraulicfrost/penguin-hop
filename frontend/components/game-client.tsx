@@ -148,7 +148,7 @@ function LoginButton() {
       }
     } catch (error) {
       console.error('NFT verification failed:', error)
-      alert(`Verification failed: ${error.message}`)
+      alert(`Verification failed: ${error instanceof Error ? error.message : 'Unknown error'}`)
     }
   }
 
