@@ -262,7 +262,7 @@ function LoginButton() {
           </div>
         ) : (
           <div className="w-full h-full relative">
-            {/* Game Container - fills remaining space */}
+            {/* Game Container - fills entire viewport */}
             <div 
               id="game-container" 
               className="w-full h-full"
@@ -272,14 +272,85 @@ function LoginButton() {
                 className="w-full h-full border-0"
                 title="Penguin Hop Game"
               />
-              
-              {/* Exit Game Button */}
-              <button
-                onClick={exitGame}
-                className="absolute top-4 right-4 bg-red-500/80 hover:bg-red-600/80 text-white font-bold px-4 py-2 rounded-lg transition-all duration-200 z-10"
-                style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}
+            </div>
+
+            {/* Floating Ice-themed UI Elements */}
+            {/* Top Left - Leaderboard Position */}
+            <button 
+              onClick={() => setShowLeaderboardPopup(true)}
+              className="absolute top-4 left-4 bg-white/10 backdrop-blur-lg rounded-2xl px-4 py-3 border border-white/20 shadow-xl transition-all duration-200 hover:bg-white/15 z-30"
+              style={{ 
+                background: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(200,230,255,0.15))',
+                boxShadow: '0 8px 32px rgba(31, 38, 135, 0.37), inset 0 1px 0 rgba(255,255,255,0.3)'
+              }}
+            >
+              <div className="flex items-center space-x-2">
+                <span className="text-blue-200 text-lg">🏆</span>
+                <div className="text-left">
+                  <p className="text-xs text-blue-100/70 font-medium">Rank</p>
+                  <p className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
+                    {getUserPosition()}
+                  </p>
+                </div>
+              </div>
+            </button>
+
+            {/* Top Right - Player & Stats */}
+            <div className="absolute top-4 right-4 flex items-center space-x-3 z-30">
+              {/* Player Info */}
+              <div 
+                className="bg-white/10 backdrop-blur-lg rounded-2xl px-4 py-3 border border-white/20 shadow-xl"
+                style={{ 
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(200,230,255,0.15))',
+                  boxShadow: '0 8px 32px rgba(31, 38, 135, 0.37), inset 0 1px 0 rgba(255,255,255,0.3)'
+                }}
               >
-                🏠 Exit Game
+                <div className="flex items-center space-x-2">
+                  <span className="text-green-200 text-sm">👤</span>
+                  <span className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
+                    {formatAddress(address)}
+                  </span>
+                </div>
+              </div>
+
+              {/* Coins */}
+              <div 
+                className="bg-white/10 backdrop-blur-lg rounded-2xl px-4 py-3 border border-white/20 shadow-xl"
+                style={{ 
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,235,150,0.15))',
+                  boxShadow: '0 8px 32px rgba(31, 38, 135, 0.37), inset 0 1px 0 rgba(255,255,255,0.3)'
+                }}
+              >
+                <div className="flex items-center space-x-2">
+                  <span className="text-yellow-200 text-sm">💰</span>
+                  <span className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>127</span>
+                </div>
+              </div>
+
+              {/* Best Score */}
+              <div 
+                className="bg-white/10 backdrop-blur-lg rounded-2xl px-4 py-3 border border-white/20 shadow-xl"
+                style={{ 
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(150,255,150,0.15))',
+                  boxShadow: '0 8px 32px rgba(31, 38, 135, 0.37), inset 0 1px 0 rgba(255,255,255,0.3)'
+                }}
+              >
+                <div className="flex items-center space-x-2">
+                  <span className="text-green-200 text-sm">⭐</span>
+                  <span className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>2,500</span>
+                </div>
+              </div>
+
+              {/* Disconnect */}
+              <button 
+                onClick={() => window.location.reload()}
+                className="bg-white/10 backdrop-blur-lg rounded-2xl px-3 py-3 border border-white/20 shadow-xl transition-all duration-200 hover:bg-red-400/20"
+                style={{ 
+                  background: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,150,150,0.15))',
+                  boxShadow: '0 8px 32px rgba(31, 38, 135, 0.37), inset 0 1px 0 rgba(255,255,255,0.3)'
+                }}
+              >
+                <span className="text-red-200 text-sm">🚪</span>
               </button>
             </div>
           </div>
