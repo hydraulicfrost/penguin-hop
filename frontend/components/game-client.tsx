@@ -14,6 +14,7 @@ function LoginButton() {
   const [gameSession, setGameSession] = useState<any>(null)
   const [leaderboard, setLeaderboard] = useState<any[]>([])
   const [showLeaderboardPopup, setShowLeaderboardPopup] = useState(false)
+  const [showStatsPanel, setShowStatsPanel] = useState(false)
   const wsRef = useRef<WebSocket | null>(null)
 
   useEffect(() => {
