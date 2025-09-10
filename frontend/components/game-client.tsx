@@ -206,11 +206,19 @@ function LoginButton() {
               />
             </div>
 
-            {/* Floating UI Elements - Only during game */}
-            {/* Top Left - Leaderboard Position */}
+            {/* Floating UI Elements - Positioned to avoid game controls */}
+            {/* Bottom Left Corner - Coins */}
+            <div className="absolute bottom-6 left-6 bg-slate-800/90 backdrop-blur-lg rounded-2xl px-4 py-3 border border-slate-600/50 shadow-xl z-30">
+              <div className="flex items-center space-x-2">
+                <span className="text-yellow-400 text-sm">💰</span>
+                <span className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>127</span>
+              </div>
+            </div>
+
+            {/* Bottom Center - Leaderboard Rank */}
             <button 
               onClick={() => setShowLeaderboardPopup(true)}
-              className="absolute top-4 left-4 bg-slate-800/90 backdrop-blur-lg rounded-2xl px-4 py-3 border border-slate-600/50 shadow-xl transition-all duration-200 hover:bg-slate-700/90 z-30"
+              className="absolute bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-800/90 backdrop-blur-lg rounded-2xl px-4 py-3 border border-slate-600/50 shadow-xl transition-all duration-200 hover:bg-slate-700/90 z-30"
             >
               <div className="flex items-center space-x-2">
                 <span className="text-blue-400 text-lg">🏆</span>
@@ -223,26 +231,8 @@ function LoginButton() {
               </div>
             </button>
 
-            {/* Top Right - Player & Stats */}
-            <div className="absolute top-4 right-4 flex items-center space-x-3 z-30">
-              {/* Player Info */}
-              <div className="bg-slate-800/90 backdrop-blur-lg rounded-2xl px-4 py-3 border border-slate-600/50 shadow-xl">
-                <div className="flex items-center space-x-2">
-                  <span className="text-green-400 text-sm">👤</span>
-                  <span className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
-                    {formatAddress(address)}
-                  </span>
-                </div>
-              </div>
-
-              {/* Coins */}
-              <div className="bg-slate-800/90 backdrop-blur-lg rounded-2xl px-4 py-3 border border-slate-600/50 shadow-xl">
-                <div className="flex items-center space-x-2">
-                  <span className="text-yellow-400 text-sm">💰</span>
-                  <span className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>127</span>
-                </div>
-              </div>
-
+            {/* Bottom Right Corner - Player Info & Stats */}
+            <div className="absolute bottom-6 right-6 flex items-center space-x-3 z-30">
               {/* Best Score */}
               <div className="bg-slate-800/90 backdrop-blur-lg rounded-2xl px-4 py-3 border border-slate-600/50 shadow-xl">
                 <div className="flex items-center space-x-2">
@@ -251,12 +241,17 @@ function LoginButton() {
                 </div>
               </div>
 
-              {/* Disconnect */}
+              {/* Player Info - Clickable to disconnect */}
               <button 
                 onClick={() => window.location.reload()}
-                className="bg-slate-800/90 backdrop-blur-lg rounded-2xl px-3 py-3 border border-slate-600/50 shadow-xl transition-all duration-200 hover:bg-red-500/20"
+                className="bg-slate-800/90 backdrop-blur-lg rounded-2xl px-4 py-3 border border-slate-600/50 shadow-xl transition-all duration-200 hover:bg-red-500/20"
               >
-                <span className="text-red-400 text-sm">🚪</span>
+                <div className="flex items-center space-x-2">
+                  <span className="text-green-400 text-sm">👤</span>
+                  <span className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
+                    {formatAddress(address)}
+                  </span>
+                </div>
               </button>
             </div>
           </div>
