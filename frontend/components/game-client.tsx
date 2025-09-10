@@ -136,11 +136,31 @@ function LoginButton() {
         <div className="absolute inset-0 bg-black/10"></div>
       </div>
 
-      {/* Top Banner - Gaming Style */}
-      <div className="relative z-20 bg-slate-900/95 backdrop-blur-md border-b border-slate-700/50 shadow-xl">
-        <div className="relative max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
-          {/* Left - Player Stats */}
-          {isConnected && address && (
+      {/* Top Right Wallet Info - Only when connected but not in game */}
+      {isConnected && address && !gameSession && (
+        <div className="absolute top-6 right-6 z-30">
+          <div className="bg-slate-800/90 backdrop-blur-md rounded-2xl px-4 py-2 border border-slate-600/50 flex items-center space-x-3">
+            <div className="w-6 h-6 bg-green-500/20 rounded-lg flex items-center justify-center">
+              <span className="text-green-400 text-xs">👤</span>
+            </div>
+            <span className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
+              {formatAddress(address)}
+            </span>
+            <button 
+              onClick={() => window.location.reload()}
+              className="text-slate-400 hover:text-red-400 text-xs"
+            >
+              ✕
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* Top Banner - Gaming Style - Only show during game */}
+      {gameSession && (
+        <div className="relative z-20 bg-slate-900/95 backdrop-blur-md border-b border-slate-700/50 shadow-xl">
+          <div className="relative max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+            {/* Left - Player Stats */}
             <div className="flex items-center space-x-4">
               {/* Leaderboard Position */}
               <button 
@@ -171,10 +191,8 @@ function LoginButton() {
                 </div>
               </div>
             </div>
-          )}
 
-          {/* Right - Game Stats & Actions */}
-          {isConnected && address ? (
+            {/* Right - Game Stats & Actions */}
             <div className="flex items-center space-x-4">
               {/* Coins */}
               <div className="bg-slate-800/90 rounded-2xl px-4 py-2 border border-slate-600/50 flex items-center space-x-2">
@@ -203,22 +221,11 @@ function LoginButton() {
                 <span className="text-slate-300 font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>Disconnect</span>
               </button>
             </div>
-          ) : (
-            /* Twitter Link for non-connected users */
-            <a 
-              href="https://twitter.com" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="bg-slate-800/90 hover:bg-slate-700/90 rounded-2xl px-4 py-2 border border-slate-600/50 transition-all duration-200 flex items-center space-x-2"
-            >
-              <span className="text-blue-400 text-sm">🐦</span>
-              <span className="text-white font-bold" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>Twitter</span>
-            </a>
-          )}
+          </div>
         </div>
-      </div>
+      )}
 
-      <div className="relative z-10 h-[calc(100vh-64px)]">
+      <div className="relative z-10" style={{ height: gameSession ? 'calc(100vh - 64px)' : '100vh' }}>
         {!isConnected ? (
           <div className="h-full flex items-center justify-center p-6">
             <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 text-center border border-white/20 shadow-2xl max-w-md">
