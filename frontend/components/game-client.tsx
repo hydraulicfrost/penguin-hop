@@ -169,77 +169,123 @@ function LoginButton() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
-      <div className="max-w-7xl mx-auto p-8">
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Animated Snow Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-sky-200 via-sky-300 to-blue-400">
+        {/* Mountain backdrop */}
+        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-white via-blue-100 to-transparent"></div>
+        
+        {/* Floating snowflakes */}
+        <div className="absolute inset-0">
+          {[...Array(50)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-2 h-2 bg-white rounded-full opacity-80 animate-pulse"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 100}%`,
+                animationDelay: `${Math.random() * 3}s`,
+                animationDuration: `${2 + Math.random() * 3}s`
+              }}
+            ></div>
+          ))}
+        </div>
+      </div>
+
+      <div className="relative z-10 max-w-7xl mx-auto p-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold mb-4">Penguin Hop Challenge</h1>
-          <p className="text-gray-400">Abstract Global Wallet Integration</p>
+          <h1 className="text-6xl font-bold mb-4 text-white drop-shadow-lg" 
+              style={{ 
+                textShadow: '4px 4px 8px rgba(0,0,255,0.6)',
+                fontFamily: 'Comic Sans MS, cursive'
+              }}>
+            🐧 PENGUIN HOP CHALLENGE 🐧
+          </h1>
+          <p className="text-xl text-blue-900 font-bold drop-shadow-md">
+            Adventure awaits in the snowy wonderland!
+          </p>
         </div>
         
         {!isConnected ? (
           <div className="text-center">
-            <button 
-              onClick={handleLogin}
-              disabled={isLoading}
-              className="bg-blue-600 hover:bg-blue-700 disabled:bg-blue-400 text-white font-bold py-3 px-6 rounded-lg transition-colors"
-            >
-              {isLoading ? 'Connecting...' : 'Sign in with Abstract'}
-            </button>
+            <div className="bg-white/90 backdrop-blur-sm rounded-3xl p-8 shadow-2xl border-4 border-blue-400 max-w-md mx-auto">
+              <div className="text-6xl mb-4">❄️</div>
+              <button 
+                onClick={handleLogin}
+                disabled={isLoading}
+                className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 disabled:from-gray-400 disabled:to-gray-500 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg transform hover:scale-105 transition-all duration-200 border-2 border-white"
+                style={{ fontFamily: 'Comic Sans MS, cursive' }}
+              >
+                {isLoading ? '🌨️ Connecting...' : '🎮 Start Your Winter Adventure!'}
+              </button>
+            </div>
           </div>
         ) : (
           <div className="space-y-6">
-            <div className="bg-gray-800 rounded-lg p-4 text-center">
-              <p className="text-green-400 mb-2">Connected to Abstract Global Wallet</p>
-              <p className="text-sm text-gray-300">
+            <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-6 text-center shadow-xl border-4 border-green-400">
+              <div className="text-4xl mb-2">🎯</div>
+              <p className="text-green-600 mb-2 font-bold text-lg">Connected to Winter Wallet!</p>
+              <p className="text-sm text-gray-700 font-mono bg-gray-100 rounded-full px-4 py-2 inline-block">
                 {formatAddress(address || '')}
               </p>
             </div>
             
             {!gameSession ? (
               <div className="text-center space-y-4">
-                <button 
-                  onClick={verifyNFT}
-                  className="bg-green-600 hover:bg-green-700 text-white font-bold py-3 px-6 rounded-lg mr-4"
-                >
-                  Verify NFT & Access Game
-                </button>
-                
-                <button 
-                  onClick={() => setShowLeaderboard(!showLeaderboard)}
-                  className="bg-purple-600 hover:bg-purple-700 text-white font-bold py-3 px-6 rounded-lg mr-4"
-                >
-                  {showLeaderboard ? 'Hide' : 'Show'} Leaderboard
-                </button>
-                
-                <button 
-                  onClick={handleLogout}
-                  className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-                >
-                  Disconnect
-                </button>
+                <div className="flex flex-wrap justify-center gap-4">
+                  <button 
+                    onClick={verifyNFT}
+                    className="bg-gradient-to-r from-green-500 to-emerald-600 hover:from-green-600 hover:to-emerald-700 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg transform hover:scale-105 transition-all duration-200 border-2 border-white"
+                    style={{ fontFamily: 'Comic Sans MS, cursive' }}
+                  >
+                    🎫 Verify Pass & Play!
+                  </button>
+                  
+                  <button 
+                    onClick={() => setShowLeaderboard(!showLeaderboard)}
+                    className="bg-gradient-to-r from-purple-500 to-pink-600 hover:from-purple-600 hover:to-pink-700 text-white font-bold py-4 px-8 rounded-full text-lg shadow-lg transform hover:scale-105 transition-all duration-200 border-2 border-white"
+                    style={{ fontFamily: 'Comic Sans MS, cursive' }}
+                  >
+                    {showLeaderboard ? '🙈 Hide' : '🏆 Show'} Champions
+                  </button>
+                  
+                  <button 
+                    onClick={handleLogout}
+                    className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-3 px-6 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200 border-2 border-white"
+                    style={{ fontFamily: 'Comic Sans MS, cursive' }}
+                  >
+                    ❄️ Exit Winter
+                  </button>
+                </div>
               </div>
             ) : (
               <div className="flex gap-6">
                 {/* Game Area */}
                 <div className="flex-1">
-                  <div className="bg-gray-800 rounded-lg p-6">
+                  <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-6 shadow-xl border-4 border-blue-400">
                     <div className="flex justify-between items-center mb-4">
-                      <h2 className="text-2xl font-semibold text-green-400">Game Access Granted!</h2>
+                      <div>
+                        <h2 className="text-3xl font-bold text-green-600" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
+                          🎮 Game Time!
+                        </h2>
+                        <p className="text-gray-600">Your winter adventure begins now!</p>
+                      </div>
                       <button 
                         onClick={exitGame}
-                        className="bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+                        className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-bold py-2 px-4 rounded-full shadow-lg transform hover:scale-105 transition-all duration-200"
+                        style={{ fontFamily: 'Comic Sans MS, cursive' }}
                       >
-                        Exit Game
+                        🚪 Exit Game
                       </button>
                     </div>
-                    <div className="bg-black rounded-lg p-4 min-h-[600px] flex items-center justify-center">
+                    <div className="bg-gradient-to-b from-sky-100 to-blue-200 rounded-2xl p-4 min-h-[600px] flex items-center justify-center border-4 border-blue-300">
                       <iframe 
                         src={`https://coco-and-bridge.marketjs-cloud2.com/en/coco-and-bridge-penguin-hop/1756889184732/index.html?tournament_id=${gameSession.tournament_id}&game_id=${gameSession.game_id}&user_id=${gameSession.user_id}&user_name=${gameSession.user_name}`}
                         width="800" 
                         height="600"
                         frameBorder="0"
                         title="Penguin Hop Game"
-                        className="rounded"
+                        className="rounded-xl shadow-lg"
                       />
                     </div>
                   </div>
@@ -247,50 +293,56 @@ function LoginButton() {
                 
                 {/* Live Leaderboard */}
                 <div className="w-80">
-                  <div className="bg-gray-800 rounded-lg p-6 h-full">
+                  <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-6 h-full shadow-xl border-4 border-purple-400">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-xl font-semibold text-purple-400">Live Leaderboard</h3>
+                      <h3 className="text-2xl font-bold text-purple-600" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
+                        🏆 Live Champions
+                      </h3>
                       <div className="flex items-center space-x-2">
-                        <div className={`w-2 h-2 rounded-full ${isConnectedToWS ? 'bg-green-400' : 'bg-yellow-400'}`}></div>
-                        <span className="text-xs text-gray-400">
-                          {isConnectedToWS ? 'Live' : 'Polling'}
+                        <div className={`w-3 h-3 rounded-full ${isConnectedToWS ? 'bg-green-400' : 'bg-yellow-400'} animate-pulse`}></div>
+                        <span className="text-xs text-gray-600 font-bold">
+                          {isConnectedToWS ? '⚡ Live' : '🔄 Updating'}
                         </span>
                       </div>
                     </div>
                     
                     {leaderboard.length > 0 ? (
-                      <div className="space-y-2 max-h-[500px] overflow-y-auto">
+                      <div className="space-y-3 max-h-[500px] overflow-y-auto">
                         {leaderboard.map((entry, index) => (
                           <div 
                             key={entry.id} 
-                            className={`p-3 rounded border ${
-                              entry.user_id === address 
-                                ? 'border-blue-400 bg-blue-900/20' 
-                                : 'border-gray-600 bg-gray-700'
+                            className={`p-4 rounded-2xl border-2 shadow-md ${
+                              entry.user_id === (address || '') 
+                                ? 'border-yellow-400 bg-gradient-to-r from-yellow-100 to-yellow-200' 
+                                : 'border-blue-300 bg-gradient-to-r from-blue-50 to-blue-100'
                             }`}
                           >
                             <div className="flex items-center justify-between">
-                              <div className="flex items-center space-x-2">
-                                <span className="text-lg font-bold">
-                                  {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `#${index + 1}`}
+                              <div className="flex items-center space-x-3">
+                                <span className="text-2xl font-bold">
+                                  {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `❄️${index + 1}`}
                                 </span>
                                 <div>
-                                  <p className="text-sm font-medium">
-                                    {entry.user_id === address ? 'You' : formatAddress(entry.user_id)}
+                                  <p className="text-sm font-bold text-gray-800">
+                                    {entry.user_id === (address || '') ? '🎭 You' : `🐧 ${formatAddress(entry.user_id)}`}
                                   </p>
-                                  <p className="text-xs text-gray-400">{formatDate(entry.created_at)}</p>
+                                  <p className="text-xs text-gray-600">{formatDate(entry.created_at)}</p>
                                 </div>
                               </div>
                               <div className="text-right">
-                                <p className="font-bold text-green-400">{entry.best_score}</p>
-                                <p className="text-xs text-gray-400">{entry.time}s</p>
+                                <p className="font-bold text-lg text-green-600">{entry.best_score}</p>
+                                <p className="text-xs text-gray-500">⏱️ {entry.time}s</p>
                               </div>
                             </div>
                           </div>
                         ))}
                       </div>
                     ) : (
-                      <p className="text-gray-400 text-center">No scores yet. Be the first to play!</p>
+                      <div className="text-center py-8">
+                        <div className="text-6xl mb-4">🌨️</div>
+                        <p className="text-gray-500 font-bold">No champions yet!</p>
+                        <p className="text-gray-400 text-sm">Be the first to conquer the winter!</p>
+                      </div>
                     )}
                   </div>
                 </div>
@@ -299,44 +351,52 @@ function LoginButton() {
             
             {/* Leaderboard Section (when not in game) */}
             {showLeaderboard && !gameSession && (
-              <div className="bg-gray-800 rounded-lg p-6">
-                <h3 className="text-xl font-semibold mb-4 text-purple-400">Leaderboard</h3>
+              <div className="bg-white/95 backdrop-blur-sm rounded-3xl p-6 shadow-xl border-4 border-purple-400">
+                <h3 className="text-3xl font-bold mb-6 text-purple-600 text-center" style={{ fontFamily: 'Comic Sans MS, cursive' }}>
+                  🏆 Hall of Champions 🏆
+                </h3>
                 {leaderboard.length > 0 ? (
                   <div className="overflow-x-auto">
                     <table className="w-full text-sm">
                       <thead>
-                        <tr className="border-b border-gray-600">
-                          <th className="text-left py-2">Rank</th>
-                          <th className="text-left py-2">Player</th>
-                          <th className="text-left py-2">Score</th>
-                          <th className="text-left py-2">Time</th>
-                          <th className="text-left py-2">Date</th>
+                        <tr className="border-b-2 border-purple-300">
+                          <th className="text-left py-3 font-bold text-purple-700">🏅 Rank</th>
+                          <th className="text-left py-3 font-bold text-purple-700">🐧 Player</th>
+                          <th className="text-left py-3 font-bold text-purple-700">⭐ Score</th>
+                          <th className="text-left py-3 font-bold text-purple-700">⏱️ Time</th>
+                          <th className="text-left py-3 font-bold text-purple-700">📅 Date</th>
                         </tr>
                       </thead>
                       <tbody>
                         {leaderboard.map((entry, index) => (
                           <tr 
                             key={entry.id} 
-                            className={`border-b border-gray-700 ${
-                              entry.user_id === address ? 'bg-blue-900/20' : ''
+                            className={`border-b border-purple-200 hover:bg-purple-50 ${
+                              entry.user_id === (address || '') ? 'bg-yellow-100' : ''
                             }`}
                           >
-                            <td className="py-2">
-                              {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : index + 1}
+                            <td className="py-3">
+                              <span className="text-lg">
+                                {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `${index + 1}️⃣`}
+                              </span>
                             </td>
-                            <td className="py-2">
-                              {entry.user_id === (address || '') ? 'You' : formatAddress(entry.user_id)}
+                            <td className="py-3 font-bold">
+                              {entry.user_id === (address || '') ? '🎭 You' : `🐧 ${formatAddress(entry.user_id)}`}
                             </td>
-                            <td className="py-2 font-bold text-green-400">{entry.best_score}</td>
-                            <td className="py-2">{entry.time}s</td>
-                            <td className="py-2 text-gray-400">{formatDate(entry.created_at)}</td>
+                            <td className="py-3 font-bold text-green-600">{entry.best_score}</td>
+                            <td className="py-3">{entry.time}s</td>
+                            <td className="py-3 text-gray-600">{formatDate(entry.created_at)}</td>
                           </tr>
                         ))}
                       </tbody>
                     </table>
                   </div>
                 ) : (
-                  <p className="text-gray-400 text-center">No scores yet. Be the first to play!</p>
+                  <div className="text-center py-12">
+                    <div className="text-8xl mb-4">🌨️</div>
+                    <p className="text-gray-500 font-bold text-xl">The leaderboard is as empty as a fresh snowfield!</p>
+                    <p className="text-gray-400">Be the first brave penguin to make your mark!</p>
+                  </div>
                 )}
               </div>
             )}
