@@ -260,24 +260,15 @@ function LoginButton() {
               {/* Hover trigger area */}
               <div className="w-4 h-full bg-transparent"></div>
               
-              {/* Leaderboard panel - matching banner colors */}
+              {/* Leaderboard panel */}
               <div className="absolute top-0 right-0 h-full w-80 transform translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out">
-                {/* Same background as banner */}
+                {/* Ice-like background matching banner */}
                 <div className="h-full bg-gradient-to-r from-blue-100/20 via-cyan-100/15 to-blue-100/20 backdrop-blur-md border-l border-blue-200/30 shadow-2xl">
-                  {/* Same frosted glass overlay as banner */}
+                  {/* Frosted glass overlay */}
                   <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-white/10 to-white/5"></div>
-                  
-                  {/* Same decorative snowflakes as banner */}
-                  <div className="absolute inset-0 pointer-events-none">
-                    <div className="absolute top-2 left-8 text-white/30 text-xs">❄</div>
-                    <div className="absolute top-8 right-16 text-white/20 text-sm">❅</div>
-                    <div className="absolute top-16 left-1/3 text-white/25 text-xs">❄</div>
-                    <div className="absolute top-24 right-8 text-white/30 text-xs">❅</div>
-                    <div className="absolute top-32 left-16 text-white/20 text-sm">❄</div>
-                  </div>
 
                   <div className="relative h-full p-6 overflow-y-auto">
-                    <h3 className="text-lg font-bold text-white drop-shadow-lg mb-4" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive', fontWeight: '900' }}>Live Leaderboard</h3>
+                    <h3 className="text-lg font-bold text-white drop-shadow-lg mb-4" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>Live Leaderboard</h3>
                     
                     <div className="space-y-3">
                       {leaderboard.length > 0 ? (
@@ -288,11 +279,11 @@ function LoginButton() {
                           >
                             <div className="flex justify-between items-center">
                               <div className="flex items-center space-x-3">
-                                <div className="text-lg font-bold text-white" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive', fontWeight: '900' }}>
+                                <div className="text-lg font-bold text-white" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
                                   {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `#${index + 1}`}
                                 </div>
                                 <div>
-                                  <p className="text-sm font-bold text-white" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive', fontWeight: '900' }}>
+                                  <p className="text-sm font-medium text-white" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
                                     {entry.user_id === (address || '') ? 'You' : formatAddress(entry.user_id)}
                                   </p>
                                   <p className="text-xs text-gray-300" style={{ fontFamily: '"Nunito", sans-serif' }}>
@@ -301,7 +292,7 @@ function LoginButton() {
                                 </div>
                               </div>
                               <div className="text-right">
-                                <p className="text-lg font-bold text-white" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive', fontWeight: '900' }}>
+                                <p className="text-lg font-bold text-white" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
                                   {entry.score}
                                 </p>
                                 <p className="text-xs text-gray-300" style={{ fontFamily: '"Nunito", sans-serif' }}>
@@ -312,9 +303,9 @@ function LoginButton() {
                           </div>
                         ))
                       ) : (
-                        <div className="text-center text-gray-300 py-8">
-                          <p className="font-bold" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive', fontWeight: '900' }}>🏆 No scores yet!</p>
-                          <p className="text-sm font-bold" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive', fontWeight: '900' }}>Be the first champion!</p>
+                        <div className="text-center text-gray-300 py-8" style={{ fontFamily: '"Nunito", sans-serif' }}>
+                          <p>🏆 No scores yet!</p>
+                          <p className="text-sm">Be the first champion!</p>
                         </div>
                       )}
                     </div>
@@ -325,6 +316,78 @@ function LoginButton() {
           </div>
         )}
       </div>
+
+      {/* Leaderboard Popup Modal */}
+      {showLeaderboardPopup && (
+        <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="bg-gradient-to-r from-blue-100/20 via-cyan-100/15 to-blue-100/20 backdrop-blur-md rounded-3xl p-8 border border-blue-200/30 shadow-2xl max-w-md w-full mx-4">
+            {/* Frosted glass overlay */}
+            <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-white/10 to-white/5 rounded-3xl"></div>
+            
+            <div className="relative">
+              <div className="flex justify-between items-center mb-6">
+                <h3 className="text-2xl font-bold text-white drop-shadow-lg" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>🏆 Live Leaderboard</h3>
+                <button 
+                  onClick={() => setShowLeaderboardPopup(false)}
+                  className="text-white hover:text-red-300 text-2xl font-bold"
+                >
+                  ✕
+                </button>
+              </div>
+              
+              <div className="space-y-3 max-h-96 overflow-y-auto">
+                {leaderboard.length > 0 ? (
+                  leaderboard.map((entry, index) => (
+                    <div 
+                      key={entry.id} 
+                      className={`bg-white/15 backdrop-blur-sm rounded-xl p-4 border border-white/20 shadow-lg ${
+                        entry.user_id === address ? 'ring-2 ring-yellow-400/50 bg-yellow-400/10' : ''
+                      }`}
+                    >
+                      <div className="flex justify-between items-center">
+                        <div className="flex items-center space-x-3">
+                          <div className="text-xl font-bold text-white" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
+                            {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `#${index + 1}`}
+                          </div>
+                          <div>
+                            <p className="text-sm font-bold text-white" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
+                              {entry.user_id === address ? 'You' : formatAddress(entry.user_id)}
+                            </p>
+                            <p className="text-xs text-gray-300" style={{ fontFamily: '"Nunito", sans-serif' }}>
+                              {formatDate(entry.created_at)}
+                            </p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-xl font-bold text-white" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
+                            {entry.score}
+                          </p>
+                          <p className="text-xs text-gray-300" style={{ fontFamily: '"Nunito", sans-serif' }}>
+                            {entry.time}s
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  ))
+                ) : (
+                  <div className="text-center text-gray-300 py-8">
+                    <p className="font-bold text-lg" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>🏆 No scores yet!</p>
+                    <p className="text-sm" style={{ fontFamily: '"Nunito", sans-serif' }}>Be the first champion!</p>
+                  </div>
+                )}
+              </div>
+              
+              <button 
+                onClick={() => setShowLeaderboardPopup(false)}
+                className="mt-6 w-full bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white font-bold py-3 px-6 rounded-2xl transition-all duration-200"
+                style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
