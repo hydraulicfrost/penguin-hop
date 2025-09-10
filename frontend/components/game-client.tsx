@@ -278,16 +278,12 @@ function LoginButton() {
             {/* Top Left - Leaderboard Position */}
             <button 
               onClick={() => setShowLeaderboardPopup(true)}
-              className="absolute top-4 left-4 bg-white/10 backdrop-blur-lg rounded-2xl px-4 py-3 border border-white/20 shadow-xl transition-all duration-200 hover:bg-white/15 z-30"
-              style={{ 
-                background: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(200,230,255,0.15))',
-                boxShadow: '0 8px 32px rgba(31, 38, 135, 0.37), inset 0 1px 0 rgba(255,255,255,0.3)'
-              }}
+              className="absolute top-4 left-4 bg-slate-800/90 backdrop-blur-lg rounded-2xl px-4 py-3 border border-slate-600/50 shadow-xl transition-all duration-200 hover:bg-slate-700/90 z-30"
             >
               <div className="flex items-center space-x-2">
-                <span className="text-blue-200 text-lg">🏆</span>
+                <span className="text-blue-400 text-lg">🏆</span>
                 <div className="text-left">
-                  <p className="text-xs text-blue-100/70 font-medium">Rank</p>
+                  <p className="text-xs text-slate-300 font-medium">Rank</p>
                   <p className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
                     {getUserPosition()}
                   </p>
@@ -298,15 +294,9 @@ function LoginButton() {
             {/* Top Right - Player & Stats */}
             <div className="absolute top-4 right-4 flex items-center space-x-3 z-30">
               {/* Player Info */}
-              <div 
-                className="bg-white/10 backdrop-blur-lg rounded-2xl px-4 py-3 border border-white/20 shadow-xl"
-                style={{ 
-                  background: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(200,230,255,0.15))',
-                  boxShadow: '0 8px 32px rgba(31, 38, 135, 0.37), inset 0 1px 0 rgba(255,255,255,0.3)'
-                }}
-              >
+              <div className="bg-slate-800/90 backdrop-blur-lg rounded-2xl px-4 py-3 border border-slate-600/50 shadow-xl">
                 <div className="flex items-center space-x-2">
-                  <span className="text-green-200 text-sm">👤</span>
+                  <span className="text-green-400 text-sm">👤</span>
                   <span className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
                     {formatAddress(address)}
                   </span>
@@ -314,29 +304,17 @@ function LoginButton() {
               </div>
 
               {/* Coins */}
-              <div 
-                className="bg-white/10 backdrop-blur-lg rounded-2xl px-4 py-3 border border-white/20 shadow-xl"
-                style={{ 
-                  background: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,235,150,0.15))',
-                  boxShadow: '0 8px 32px rgba(31, 38, 135, 0.37), inset 0 1px 0 rgba(255,255,255,0.3)'
-                }}
-              >
+              <div className="bg-slate-800/90 backdrop-blur-lg rounded-2xl px-4 py-3 border border-slate-600/50 shadow-xl">
                 <div className="flex items-center space-x-2">
-                  <span className="text-yellow-200 text-sm">💰</span>
+                  <span className="text-yellow-400 text-sm">💰</span>
                   <span className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>127</span>
                 </div>
               </div>
 
               {/* Best Score */}
-              <div 
-                className="bg-white/10 backdrop-blur-lg rounded-2xl px-4 py-3 border border-white/20 shadow-xl"
-                style={{ 
-                  background: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(150,255,150,0.15))',
-                  boxShadow: '0 8px 32px rgba(31, 38, 135, 0.37), inset 0 1px 0 rgba(255,255,255,0.3)'
-                }}
-              >
+              <div className="bg-slate-800/90 backdrop-blur-lg rounded-2xl px-4 py-3 border border-slate-600/50 shadow-xl">
                 <div className="flex items-center space-x-2">
-                  <span className="text-green-200 text-sm">⭐</span>
+                  <span className="text-green-400 text-sm">⭐</span>
                   <span className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>2,500</span>
                 </div>
               </div>
@@ -344,13 +322,9 @@ function LoginButton() {
               {/* Disconnect */}
               <button 
                 onClick={() => window.location.reload()}
-                className="bg-white/10 backdrop-blur-lg rounded-2xl px-3 py-3 border border-white/20 shadow-xl transition-all duration-200 hover:bg-red-400/20"
-                style={{ 
-                  background: 'linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,150,150,0.15))',
-                  boxShadow: '0 8px 32px rgba(31, 38, 135, 0.37), inset 0 1px 0 rgba(255,255,255,0.3)'
-                }}
+                className="bg-slate-800/90 backdrop-blur-lg rounded-2xl px-3 py-3 border border-slate-600/50 shadow-xl transition-all duration-200 hover:bg-red-500/20"
               >
-                <span className="text-red-200 text-sm">🚪</span>
+                <span className="text-red-400 text-sm">🚪</span>
               </button>
             </div>
           </div>
