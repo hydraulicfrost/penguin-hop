@@ -153,11 +153,8 @@ function LoginButton() {
                 <div className="text-left">
                   <p className="text-xs text-slate-400 font-medium">Leaderboard place:</p>
                   <p className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
-                    {getUserPosition()} <span className="text-xs text-slate-400 font-normal">Top 1000: Platinum</span>
+                    {getUserPosition()}
                   </p>
-                </div>
-                <div className="text-slate-400 text-xs bg-slate-700/50 rounded-lg px-2 py-1">
-                  144
                 </div>
               </button>
 
@@ -171,24 +168,6 @@ function LoginButton() {
                   <p className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
                     {formatAddress(address)}
                   </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Center - Game Progress */}
-          {isConnected && address && (
-            <div className="bg-slate-800/90 rounded-2xl px-6 py-2 border border-slate-600/50 flex items-center space-x-4">
-              <div className="w-8 h-8 bg-orange-500/20 rounded-lg flex items-center justify-center">
-                <span className="text-orange-400 text-sm">🎯</span>
-              </div>
-              <div className="text-center">
-                <p className="text-xs text-slate-400 font-medium">Next: Sky High</p>
-                <div className="flex items-center space-x-2 mt-1">
-                  <div className="w-32 h-2 bg-slate-700 rounded-full">
-                    <div className="w-3/4 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
-                  </div>
-                  <span className="text-white text-xs font-bold">100,000 m</span>
                 </div>
               </div>
             </div>
@@ -213,19 +192,19 @@ function LoginButton() {
                 <span className="text-green-400 font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>2,500</span>
               </div>
 
-              {/* Profile/Disconnect */}
+              {/* Disconnect */}
               <button 
                 onClick={() => window.location.reload()}
                 className="bg-slate-800/90 hover:bg-slate-700/90 rounded-2xl px-4 py-2 border border-slate-600/50 transition-all duration-200 flex items-center space-x-2"
               >
-                <div className="w-6 h-6 bg-slate-600/50 rounded-lg flex items-center justify-center">
-                  <span className="text-slate-300 text-xs">@</span>
+                <div className="w-6 h-6 bg-red-500/20 rounded-lg flex items-center justify-center">
+                  <span className="text-red-400 text-xs">🚪</span>
                 </div>
-                <span className="text-slate-300 font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>@Hazbobol</span>
+                <span className="text-slate-300 font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>Disconnect</span>
               </button>
             </div>
           ) : (
-            /* Twitter Link for non-connected users */
+            {/* Twitter Link for non-connected users */}
             <a 
               href="https://twitter.com" 
               target="_blank" 
@@ -239,7 +218,7 @@ function LoginButton() {
         </div>
       </div>
 
-      <div className="relative z-10 min-h-[calc(100vh-80px)]">
+      <div className="relative z-10 h-[calc(100vh-64px)]">
         {!isConnected ? (
           <div className="h-full flex items-center justify-center p-6">
             <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 text-center border border-white/20 shadow-2xl max-w-md">
@@ -275,28 +254,26 @@ function LoginButton() {
             </div>
           </div>
         ) : (
-          <div className="h-full relative">
-            {/* Game Container - fills browser window */}
+          <div className="w-full h-full relative">
+            {/* Game Container - fills remaining space */}
             <div 
               id="game-container" 
-              className="w-full h-full bg-black overflow-hidden"
+              className="w-full h-full"
             >
-              <div className="w-full h-full flex items-center justify-center relative">
-                <iframe
-                  src={`https://coco-and-bridge.marketjs-cloud2.com/en/coco-and-bridge-penguin-hop/1756889184732/index.html?tournament_id=${gameSession.tournament_id}&user_id=${gameSession.user_id}&game_id=${gameSession.game_id}`}
-                  className="w-full h-full border-0"
-                  title="Penguin Hop Game"
-                />
-                
-                {/* Exit Game Button */}
-                <button
-                  onClick={exitGame}
-                  className="absolute top-4 right-4 bg-red-500/80 hover:bg-red-600/80 text-white font-bold px-4 py-2 rounded-lg transition-all duration-200 z-10"
-                  style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}
-                >
-                  🏠 Exit Game
-                </button>
-              </div>
+              <iframe
+                src={`https://coco-and-bridge.marketjs-cloud2.com/en/coco-and-bridge-penguin-hop/1756889184732/index.html?tournament_id=${gameSession.tournament_id}&user_id=${gameSession.user_id}&game_id=${gameSession.game_id}`}
+                className="w-full h-full border-0"
+                title="Penguin Hop Game"
+              />
+              
+              {/* Exit Game Button */}
+              <button
+                onClick={exitGame}
+                className="absolute top-4 right-4 bg-red-500/80 hover:bg-red-600/80 text-white font-bold px-4 py-2 rounded-lg transition-all duration-200 z-10"
+                style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}
+              >
+                🏠 Exit Game
+              </button>
             </div>
           </div>
         )}
