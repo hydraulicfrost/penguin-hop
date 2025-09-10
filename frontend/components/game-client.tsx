@@ -206,53 +206,82 @@ function LoginButton() {
               />
             </div>
 
-            {/* Floating UI Elements - Positioned to avoid game controls */}
-            {/* Bottom Left Corner - Coins */}
-            <div className="absolute bottom-6 left-6 bg-slate-800/90 backdrop-blur-lg rounded-2xl px-4 py-3 border border-slate-600/50 shadow-xl z-30">
-              <div className="flex items-center space-x-2">
-                <span className="text-yellow-400 text-sm">💰</span>
-                <span className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>127</span>
-              </div>
-            </div>
-
-            {/* Bottom Center - Leaderboard Rank */}
+            {/* Slide-out Stats Panel */}
+            {/* Tab Button - Always visible */}
             <button 
-              onClick={() => setShowLeaderboardPopup(true)}
-              className="absolute bottom-6 left-1/2 transform -translate-x-1/2 bg-slate-800/90 backdrop-blur-lg rounded-2xl px-4 py-3 border border-slate-600/50 shadow-xl transition-all duration-200 hover:bg-slate-700/90 z-30"
+              onClick={() => setShowStatsPanel(!showStatsPanel)}
+              className="absolute left-0 top-1/2 transform -translate-y-1/2 bg-slate-800/90 backdrop-blur-lg rounded-r-2xl px-3 py-6 border border-l-0 border-slate-600/50 shadow-xl transition-all duration-200 hover:bg-slate-700/90 z-30"
             >
-              <div className="flex items-center space-x-2">
-                <span className="text-blue-400 text-lg">🏆</span>
-                <div className="text-left">
-                  <p className="text-xs text-slate-300 font-medium">Rank</p>
-                  <p className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
-                    {getUserPosition()}
-                  </p>
-                </div>
-              </div>
+              <span className={`text-white text-lg transition-transform duration-200 ${showStatsPanel ? 'rotate-180' : ''}`}>
+                →
+              </span>
             </button>
 
-            {/* Bottom Right Corner - Player Info & Stats */}
-            <div className="absolute bottom-6 right-6 flex items-center space-x-3 z-30">
-              {/* Best Score */}
-              <div className="bg-slate-800/90 backdrop-blur-lg rounded-2xl px-4 py-3 border border-slate-600/50 shadow-xl">
-                <div className="flex items-center space-x-2">
-                  <span className="text-green-400 text-sm">⭐</span>
-                  <span className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>2,500</span>
+            {/* Stats Panel - Slides out from left */}
+            <div className={`absolute left-0 top-1/2 transform -translate-y-1/2 transition-all duration-300 ease-out z-20 ${
+              showStatsPanel ? 'translate-x-0' : '-translate-x-full'
+            }`}>
+              <div className="bg-slate-800/90 backdrop-blur-lg rounded-r-2xl p-6 border border-l-0 border-slate-600/50 shadow-xl ml-12">
+                <div className="flex flex-col space-y-4 min-w-[200px]">
+                  {/* Coins */}
+                  <div className="bg-slate-700/50 rounded-xl px-4 py-3 border border-slate-600/30">
+                    <div className="flex items-center space-x-3">
+                      <span className="text-yellow-400 text-lg">💰</span>
+                      <div>
+                        <p className="text-xs text-slate-300 font-medium">Coins</p>
+                        <p className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
+                          127
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Best Score */}
+                  <div className="bg-slate-700/50 rounded-xl px-4 py-3 border border-slate-600/30">
+                    <div className="flex items-center space-x-3">
+                      <span className="text-green-400 text-lg">⭐</span>
+                      <div>
+                        <p className="text-xs text-slate-300 font-medium">Best Score</p>
+                        <p className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
+                          2,500
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Leaderboard Rank */}
+                  <button 
+                    onClick={() => setShowLeaderboardPopup(true)}
+                    className="bg-slate-700/50 rounded-xl px-4 py-3 border border-slate-600/30 hover:bg-slate-600/50 transition-all duration-200"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <span className="text-blue-400 text-lg">🏆</span>
+                      <div className="text-left">
+                        <p className="text-xs text-slate-300 font-medium">Leaderboard</p>
+                        <p className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
+                          {getUserPosition()}
+                        </p>
+                      </div>
+                    </div>
+                  </button>
+
+                  {/* Player Wallet - Click to disconnect */}
+                  <button 
+                    onClick={() => window.location.reload()}
+                    className="bg-slate-700/50 rounded-xl px-4 py-3 border border-slate-600/30 hover:bg-red-500/20 transition-all duration-200"
+                  >
+                    <div className="flex items-center space-x-3">
+                      <span className="text-green-400 text-lg">👤</span>
+                      <div className="text-left">
+                        <p className="text-xs text-slate-300 font-medium">Player (click to disconnect)</p>
+                        <p className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
+                          {formatAddress(address)}
+                        </p>
+                      </div>
+                    </div>
+                  </button>
                 </div>
               </div>
-
-              {/* Player Info - Clickable to disconnect */}
-              <button 
-                onClick={() => window.location.reload()}
-                className="bg-slate-800/90 backdrop-blur-lg rounded-2xl px-4 py-3 border border-slate-600/50 shadow-xl transition-all duration-200 hover:bg-red-500/20"
-              >
-                <div className="flex items-center space-x-2">
-                  <span className="text-green-400 text-sm">👤</span>
-                  <span className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
-                    {formatAddress(address)}
-                  </span>
-                </div>
-              </button>
             </div>
           </div>
         )}
