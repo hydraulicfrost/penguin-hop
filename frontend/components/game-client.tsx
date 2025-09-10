@@ -13,6 +13,7 @@ function LoginButton() {
   const { address, isConnected } = useAccount()
   const [gameSession, setGameSession] = useState<any>(null)
   const [leaderboard, setLeaderboard] = useState<any[]>([])
+  const [showLeaderboardPopup, setShowLeaderboardPopup] = useState(false)
   const wsRef = useRef<WebSocket | null>(null)
 
   useEffect(() => {
@@ -115,6 +116,12 @@ function LoginButton() {
     return new Date(dateString).toLocaleDateString()
   }
 
+  const getUserPosition = () => {
+    if (!address || leaderboard.length === 0) return 'Unranked'
+    const userIndex = leaderboard.findIndex(entry => entry.user_id === address)
+    return userIndex === -1 ? 'Unranked' : `${userIndex + 1}th`
+  }
+
   return (
     <div className="min-h-screen relative overflow-hidden" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
       {/* Background Image */}
@@ -129,68 +136,105 @@ function LoginButton() {
         <div className="absolute inset-0 bg-black/10"></div>
       </div>
 
-      {/* Animated Snowflakes */}
-      <div className="absolute inset-0 pointer-events-none overflow-hidden">
-        {[...Array(20)].map((_, i) => (
-          <div
-            key={i}
-            className="absolute text-white opacity-70 animate-pulse"
-            style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              fontSize: `${Math.random() * 10 + 10}px`
-            }}
-          >
-            ❄
-          </div>
-        ))}
-      </div>
-
-      {/* Top Banner */}
-      <div className="relative z-20 bg-gradient-to-r from-blue-100/20 via-cyan-100/15 to-blue-100/20 backdrop-blur-md border-b border-blue-200/30 shadow-lg">
-        {/* Frosted glass overlay */}
-        <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-white/10 to-white/5"></div>
-        
-        {/* Decorative snowflakes */}
-        <div className="absolute inset-0 pointer-events-none">
-          <div className="absolute top-2 left-8 text-white/30 text-xs">❄</div>
-          <div className="absolute top-4 right-16 text-white/20 text-sm">❅</div>
-          <div className="absolute bottom-2 left-1/3 text-white/25 text-xs">❄</div>
-        </div>
-        
-        <div className="relative max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-          {/* Left - Twitter Link */}
-          <a 
-            href="https://twitter.com" 
-            target="_blank" 
-            rel="noopener noreferrer"
-            className="text-white hover:text-blue-200 transition-colors duration-200 text-xl font-bold drop-shadow-lg"
-            style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}
-          >
-            🐦 Twitter
-          </a>
-          
-          {/* Right - Wallet Info */}
+      {/* Top Banner - Gaming Style */}
+      <div className="relative z-20 bg-slate-900/95 backdrop-blur-md border-b border-slate-700/50 shadow-xl">
+        <div className="relative max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
+          {/* Left - Player Stats */}
           {isConnected && address && (
-            <div className="flex items-center space-x-6">
-              <span className="text-white font-bold drop-shadow-lg" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
-                {formatAddress(address)}
-              </span>
-              <div className="bg-yellow-400/90 backdrop-blur-sm px-3 py-1 rounded-full text-black font-bold text-sm border border-yellow-300/50 shadow-lg" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
-                Coins: 127
+            <div className="flex items-center space-x-4">
+              {/* Leaderboard Position */}
+              <button 
+                onClick={() => setShowLeaderboardPopup(true)}
+                className="bg-slate-800/90 hover:bg-slate-700/90 rounded-2xl px-4 py-2 border border-slate-600/50 transition-all duration-200 flex items-center space-x-3"
+              >
+                <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center">
+                  <span className="text-blue-400 text-sm font-bold">🏆</span>
+                </div>
+                <div className="text-left">
+                  <p className="text-xs text-slate-400 font-medium">Leaderboard place:</p>
+                  <p className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
+                    {getUserPosition()} <span className="text-xs text-slate-400 font-normal">Top 1000: Platinum</span>
+                  </p>
+                </div>
+                <div className="text-slate-400 text-xs bg-slate-700/50 rounded-lg px-2 py-1">
+                  144
+                </div>
+              </button>
+
+              {/* Player Info */}
+              <div className="bg-slate-800/90 rounded-2xl px-4 py-2 border border-slate-600/50 flex items-center space-x-3">
+                <div className="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center">
+                  <span className="text-green-400 text-sm">👤</span>
+                </div>
+                <div className="text-left">
+                  <p className="text-xs text-slate-400 font-medium">Player:</p>
+                  <p className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
+                    {formatAddress(address)}
+                  </p>
+                </div>
               </div>
-              <div className="bg-green-400/90 backdrop-blur-sm px-3 py-1 rounded-full text-black font-bold text-sm border border-green-300/50 shadow-lg" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
-                Best: 2,500
+            </div>
+          )}
+
+          {/* Center - Game Progress */}
+          {isConnected && address && (
+            <div className="bg-slate-800/90 rounded-2xl px-6 py-2 border border-slate-600/50 flex items-center space-x-4">
+              <div className="w-8 h-8 bg-orange-500/20 rounded-lg flex items-center justify-center">
+                <span className="text-orange-400 text-sm">🎯</span>
               </div>
+              <div className="text-center">
+                <p className="text-xs text-slate-400 font-medium">Next: Sky High</p>
+                <div className="flex items-center space-x-2 mt-1">
+                  <div className="w-32 h-2 bg-slate-700 rounded-full">
+                    <div className="w-3/4 h-2 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full"></div>
+                  </div>
+                  <span className="text-white text-xs font-bold">100,000 m</span>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Right - Game Stats & Actions */}
+          {isConnected && address ? (
+            <div className="flex items-center space-x-4">
+              {/* Coins */}
+              <div className="bg-slate-800/90 rounded-2xl px-4 py-2 border border-slate-600/50 flex items-center space-x-2">
+                <div className="w-6 h-6 bg-yellow-500/20 rounded-lg flex items-center justify-center">
+                  <span className="text-yellow-400 text-xs">💰</span>
+                </div>
+                <span className="text-yellow-400 font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>127</span>
+              </div>
+
+              {/* Best Score */}
+              <div className="bg-slate-800/90 rounded-2xl px-4 py-2 border border-slate-600/50 flex items-center space-x-2">
+                <div className="w-6 h-6 bg-green-500/20 rounded-lg flex items-center justify-center">
+                  <span className="text-green-400 text-xs">⭐</span>
+                </div>
+                <span className="text-green-400 font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>2,500</span>
+              </div>
+
+              {/* Profile/Disconnect */}
               <button 
                 onClick={() => window.location.reload()}
-                className="bg-red-400/90 backdrop-blur-sm hover:bg-red-500/90 text-white font-bold px-4 py-2 rounded-full transition-all duration-200 border border-red-300/50 shadow-lg text-sm"
-                style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}
+                className="bg-slate-800/90 hover:bg-slate-700/90 rounded-2xl px-4 py-2 border border-slate-600/50 transition-all duration-200 flex items-center space-x-2"
               >
-                Disconnect
+                <div className="w-6 h-6 bg-slate-600/50 rounded-lg flex items-center justify-center">
+                  <span className="text-slate-300 text-xs">@</span>
+                </div>
+                <span className="text-slate-300 font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>@Hazbobol</span>
               </button>
             </div>
+          ) : (
+            /* Twitter Link for non-connected users */
+            <a 
+              href="https://twitter.com" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="bg-slate-800/90 hover:bg-slate-700/90 rounded-2xl px-4 py-2 border border-slate-600/50 transition-all duration-200 flex items-center space-x-2"
+            >
+              <span className="text-blue-400 text-sm">🐦</span>
+              <span className="text-white font-bold" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>Twitter</span>
+            </a>
           )}
         </div>
       </div>
@@ -252,65 +296,6 @@ function LoginButton() {
                 >
                   🏠 Exit Game
                 </button>
-              </div>
-            </div>
-
-            {/* Hover-out Ice Leaderboard - positioned for browser window */}
-            <div className="fixed top-20 right-0 h-[calc(100vh-80px)] z-50 group">
-              {/* Hover trigger area */}
-              <div className="w-4 h-full bg-transparent"></div>
-              
-              {/* Leaderboard panel */}
-              <div className="absolute top-0 right-0 h-full w-80 transform translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out">
-                {/* Ice-like background matching banner */}
-                <div className="h-full bg-gradient-to-r from-blue-100/20 via-cyan-100/15 to-blue-100/20 backdrop-blur-md border-l border-blue-200/30 shadow-2xl">
-                  {/* Frosted glass overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-white/10 to-white/5"></div>
-
-                  <div className="relative h-full p-6 overflow-y-auto">
-                    <h3 className="text-lg font-bold text-white drop-shadow-lg mb-4" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>Live Leaderboard</h3>
-                    
-                    <div className="space-y-3">
-                      {leaderboard.length > 0 ? (
-                        leaderboard.map((entry, index) => (
-                          <div 
-                            key={entry.id} 
-                            className="bg-white/15 backdrop-blur-sm rounded-xl p-3 border border-white/20 shadow-lg"
-                          >
-                            <div className="flex justify-between items-center">
-                              <div className="flex items-center space-x-3">
-                                <div className="text-lg font-bold text-white" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
-                                  {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `#${index + 1}`}
-                                </div>
-                                <div>
-                                  <p className="text-sm font-medium text-white" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
-                                    {entry.user_id === (address || '') ? 'You' : formatAddress(entry.user_id)}
-                                  </p>
-                                  <p className="text-xs text-gray-300" style={{ fontFamily: '"Nunito", sans-serif' }}>
-                                    {formatDate(entry.created_at)}
-                                  </p>
-                                </div>
-                              </div>
-                              <div className="text-right">
-                                <p className="text-lg font-bold text-white" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
-                                  {entry.score}
-                                </p>
-                                <p className="text-xs text-gray-300" style={{ fontFamily: '"Nunito", sans-serif' }}>
-                                  {entry.time}s
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        ))
-                      ) : (
-                        <div className="text-center text-gray-300 py-8" style={{ fontFamily: '"Nunito", sans-serif' }}>
-                          <p>🏆 No scores yet!</p>
-                          <p className="text-sm">Be the first champion!</p>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
