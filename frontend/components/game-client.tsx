@@ -317,7 +317,7 @@ function LoginButton() {
             </div>
 
             {/* Hover-out Ice Leaderboard */}
-            <div className="fixed top-0 right-0 h-full z-50 group">
+            <div className="fixed top-20 right-0 h-[calc(100vh-80px)] z-50 group">
               {/* Hover trigger area */}
               <div className="w-4 h-full bg-transparent"></div>
               
@@ -331,7 +331,7 @@ function LoginButton() {
                   {/* Content */}
                   <div className="relative h-full p-4 overflow-hidden">
                     <div className="flex items-center justify-between mb-4">
-                      <h3 className="text-lg font-bold text-white drop-shadow-lg">Live Leaderboard</h3>
+                      <h3 className="text-lg font-bold text-white drop-shadow-lg" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>Live Leaderboard</h3>
                       <div className="flex items-center space-x-2">
                         <div className={`w-2 h-2 rounded-full ${isConnectedToWS ? 'bg-green-400' : 'bg-yellow-400'} animate-pulse drop-shadow-sm`}></div>
                         <span className="text-xs text-white/80 drop-shadow-sm">
