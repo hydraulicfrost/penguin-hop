@@ -222,7 +222,7 @@ function LoginButton() {
             <div className={`absolute left-0 top-1/2 transform -translate-y-1/2 transition-all duration-300 ease-out z-20 ${
               showStatsPanel ? 'translate-x-0' : '-translate-x-full'
             }`}>
-              <div className="bg-slate-800/90 backdrop-blur-lg rounded-r-2xl p-6 border border-l-0 border-slate-600/50 shadow-xl ml-12">
+              <div className="bg-slate-800/90 backdrop-blur-lg rounded-r-2xl p-6 border border-l-0 border-slate-600/50 shadow-xl ml-[52px]">
                 <div className="flex flex-col space-y-4 min-w-[200px]">
                   {/* Coins */}
                   <div className="bg-slate-700/50 rounded-xl px-4 py-3 border border-slate-600/30">
