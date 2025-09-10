@@ -156,76 +156,8 @@ function LoginButton() {
         </div>
       )}
 
-      {/* Top Banner - Gaming Style - Only show during game */}
-      {gameSession && (
-        <div className="relative z-20 bg-slate-900/95 backdrop-blur-md border-b border-slate-700/50 shadow-xl">
-          <div className="relative max-w-7xl mx-auto px-6 py-3 flex justify-between items-center">
-            {/* Left - Player Stats */}
-            <div className="flex items-center space-x-4">
-              {/* Leaderboard Position */}
-              <button 
-                onClick={() => setShowLeaderboardPopup(true)}
-                className="bg-slate-800/90 hover:bg-slate-700/90 rounded-2xl px-4 py-2 border border-slate-600/50 transition-all duration-200 flex items-center space-x-3"
-              >
-                <div className="w-8 h-8 bg-blue-500/20 rounded-lg flex items-center justify-center">
-                  <span className="text-blue-400 text-sm font-bold">🏆</span>
-                </div>
-                <div className="text-left">
-                  <p className="text-xs text-slate-400 font-medium">Leaderboard place:</p>
-                  <p className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
-                    {getUserPosition()}
-                  </p>
-                </div>
-              </button>
-
-              {/* Player Info */}
-              <div className="bg-slate-800/90 rounded-2xl px-4 py-2 border border-slate-600/50 flex items-center space-x-3">
-                <div className="w-8 h-8 bg-green-500/20 rounded-lg flex items-center justify-center">
-                  <span className="text-green-400 text-sm">👤</span>
-                </div>
-                <div className="text-left">
-                  <p className="text-xs text-slate-400 font-medium">Player:</p>
-                  <p className="text-white font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
-                    {formatAddress(address)}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Right - Game Stats & Actions */}
-            <div className="flex items-center space-x-4">
-              {/* Coins */}
-              <div className="bg-slate-800/90 rounded-2xl px-4 py-2 border border-slate-600/50 flex items-center space-x-2">
-                <div className="w-6 h-6 bg-yellow-500/20 rounded-lg flex items-center justify-center">
-                  <span className="text-yellow-400 text-xs">💰</span>
-                </div>
-                <span className="text-yellow-400 font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>127</span>
-              </div>
-
-              {/* Best Score */}
-              <div className="bg-slate-800/90 rounded-2xl px-4 py-2 border border-slate-600/50 flex items-center space-x-2">
-                <div className="w-6 h-6 bg-green-500/20 rounded-lg flex items-center justify-center">
-                  <span className="text-green-400 text-xs">⭐</span>
-                </div>
-                <span className="text-green-400 font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>2,500</span>
-              </div>
-
-              {/* Disconnect */}
-              <button 
-                onClick={() => window.location.reload()}
-                className="bg-slate-800/90 hover:bg-slate-700/90 rounded-2xl px-4 py-2 border border-slate-600/50 transition-all duration-200 flex items-center space-x-2"
-              >
-                <div className="w-6 h-6 bg-red-500/20 rounded-lg flex items-center justify-center">
-                  <span className="text-red-400 text-xs">🚪</span>
-                </div>
-                <span className="text-slate-300 font-bold text-sm" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>Disconnect</span>
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
-
-      <div className="relative z-10" style={{ height: gameSession ? 'calc(100vh - 64px)' : '100vh' }}>
+      {/* Main Content Area */}
+      <div className="relative z-10 h-screen">
         {!isConnected ? (
           <div className="h-full flex items-center justify-center p-6">
             <div className="bg-white/10 backdrop-blur-md rounded-3xl p-8 text-center border border-white/20 shadow-2xl max-w-md">
@@ -274,7 +206,7 @@ function LoginButton() {
               />
             </div>
 
-            {/* Floating Ice-themed UI Elements */}
+            {/* Floating UI Elements - Only during game */}
             {/* Top Left - Leaderboard Position */}
             <button 
               onClick={() => setShowLeaderboardPopup(true)}
