@@ -204,7 +204,7 @@ function LoginButton() {
               </button>
             </div>
           ) : (
-            {/* Twitter Link for non-connected users */}
+            /* Twitter Link for non-connected users */
             <a 
               href="https://twitter.com" 
               target="_blank" 
