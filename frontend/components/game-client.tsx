@@ -170,10 +170,15 @@ function LoginButton() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Animated Snow Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-sky-200 via-sky-300 to-blue-400">
-        {/* Mountain backdrop */}
-        <div className="absolute bottom-0 left-0 right-0 h-64 bg-gradient-to-t from-white via-blue-100 to-transparent"></div>
+      {/* Background Image */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: 'url(/background.png)'
+        }}
+      >
+        {/* Optional overlay for better text readability */}
+        <div className="absolute inset-0 bg-black/10"></div>
         
         {/* Floating snowflakes */}
         <div className="absolute inset-0">
