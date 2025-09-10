@@ -260,33 +260,24 @@ function LoginButton() {
               {/* Hover trigger area */}
               <div className="w-4 h-full bg-transparent"></div>
               
-              {/* Leaderboard panel */}
+              {/* Leaderboard panel - matching banner colors */}
               <div className="absolute top-0 right-0 h-full w-80 transform translate-x-full group-hover:translate-x-0 transition-transform duration-300 ease-out">
-                {/* Ice-like background matching banner */}
+                {/* Same background as banner */}
                 <div className="h-full bg-gradient-to-r from-blue-100/20 via-cyan-100/15 to-blue-100/20 backdrop-blur-md border-l border-blue-200/30 shadow-2xl">
-                  {/* Frosted glass overlay */}
+                  {/* Same frosted glass overlay as banner */}
                   <div className="absolute inset-0 bg-gradient-to-r from-white/5 via-white/10 to-white/5"></div>
                   
-                  {/* Ice crystal decorations */}
-                  <div className="absolute inset-0 pointer-events-none overflow-hidden">
-                    {[...Array(8)].map((_, i) => (
-                      <div
-                        key={i}
-                        className="absolute text-white/20 animate-pulse"
-                        style={{
-                          left: `${Math.random() * 80 + 10}%`,
-                          top: `${Math.random() * 80 + 10}%`,
-                          animationDelay: `${Math.random() * 2}s`,
-                          fontSize: '12px'
-                        }}
-                      >
-                        ❄
-                      </div>
-                    ))}
+                  {/* Same decorative snowflakes as banner */}
+                  <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute top-2 left-8 text-white/30 text-xs">❄</div>
+                    <div className="absolute top-8 right-16 text-white/20 text-sm">❅</div>
+                    <div className="absolute top-16 left-1/3 text-white/25 text-xs">❄</div>
+                    <div className="absolute top-24 right-8 text-white/30 text-xs">❅</div>
+                    <div className="absolute top-32 left-16 text-white/20 text-sm">❄</div>
                   </div>
 
                   <div className="relative h-full p-6 overflow-y-auto">
-                    <h3 className="text-lg font-bold text-white drop-shadow-lg mb-4" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>Live Leaderboard</h3>
+                    <h3 className="text-lg font-bold text-white drop-shadow-lg mb-4" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive', fontWeight: '900' }}>Live Leaderboard</h3>
                     
                     <div className="space-y-3">
                       {leaderboard.length > 0 ? (
@@ -297,11 +288,11 @@ function LoginButton() {
                           >
                             <div className="flex justify-between items-center">
                               <div className="flex items-center space-x-3">
-                                <div className="text-lg font-bold text-white" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
+                                <div className="text-lg font-bold text-white" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive', fontWeight: '900' }}>
                                   {index === 0 ? '🥇' : index === 1 ? '🥈' : index === 2 ? '🥉' : `#${index + 1}`}
                                 </div>
                                 <div>
-                                  <p className="text-sm font-medium text-white" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
+                                  <p className="text-sm font-bold text-white" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive', fontWeight: '900' }}>
                                     {entry.user_id === (address || '') ? 'You' : formatAddress(entry.user_id)}
                                   </p>
                                   <p className="text-xs text-gray-300" style={{ fontFamily: '"Nunito", sans-serif' }}>
@@ -310,7 +301,7 @@ function LoginButton() {
                                 </div>
                               </div>
                               <div className="text-right">
-                                <p className="text-lg font-bold text-white" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive' }}>
+                                <p className="text-lg font-bold text-white" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive', fontWeight: '900' }}>
                                   {entry.score}
                                 </p>
                                 <p className="text-xs text-gray-300" style={{ fontFamily: '"Nunito", sans-serif' }}>
@@ -321,9 +312,9 @@ function LoginButton() {
                           </div>
                         ))
                       ) : (
-                        <div className="text-center text-gray-300 py-8" style={{ fontFamily: '"Nunito", sans-serif' }}>
-                          <p>🏆 No scores yet!</p>
-                          <p className="text-sm">Be the first champion!</p>
+                        <div className="text-center text-gray-300 py-8">
+                          <p className="font-bold" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive', fontWeight: '900' }}>🏆 No scores yet!</p>
+                          <p className="text-sm font-bold" style={{ fontFamily: '"Fredoka One", "Nunito", "Comic Sans MS", cursive', fontWeight: '900' }}>Be the first champion!</p>
                         </div>
                       )}
                     </div>
