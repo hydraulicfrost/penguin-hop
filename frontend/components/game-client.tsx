@@ -211,10 +211,10 @@ export default function GameClient() {
                   style={{
                     position: 'absolute',
                     zIndex: 1,
-                    top: '33%',
+                    top: '29%',
                     left: '15%',
                     width: '70%',
-                    height: '44%',
+                    height: '48%',
                     border: 'none',
                     borderRadius: '15px',
                   }}
