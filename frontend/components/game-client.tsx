@@ -262,12 +262,13 @@ export default function GameClient() {
             }}
           />
 
-          {/* Mobile-specific: wider iframe */}
+          {/* Mobile-specific: wider iframe, slightly less height */}
           <style jsx>{`
             @media (max-width: 767px) {
               .game-iframe-normal {
                 left: 5% !important;
                 width: 90% !important;
+                height: 42% !important;
               }
             }
           `}</style>
