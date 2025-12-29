@@ -206,7 +206,7 @@ export default function GameClient() {
               title="Penguin Hop Game"
               className="absolute z-[1] border-none rounded-lg md:rounded-2xl"
               style={{
-                top: '28%',
+                top: '32%',
                 left: '15%',
                 width: '70%',
                 height: '44%',
