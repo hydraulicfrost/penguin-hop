@@ -44,6 +44,7 @@ export default function GameClient() {
   const [showLeaderboard, setShowLeaderboard] = useState(false)
   const [isFullscreen, setIsFullscreen] = useState(false)
   const [showInfoTooltip, setShowInfoTooltip] = useState(false)
+  const [showMenu, setShowMenu] = useState(false)
   
   const wsRef = useRef<WebSocket | null>(null)
 
@@ -435,36 +436,53 @@ export default function GameClient() {
                   </div>
                 </div>
 
-                {/* Leaderboard Toggle - Desktop only */}
+                {/* Hamburger Menu Button - Desktop only */}
                 <button
-                  onClick={() => setShowLeaderboard(!showLeaderboard)}
-                  className="hidden md:flex bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-bold py-2 md:py-3 rounded-xl md:rounded-2xl transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl items-center justify-center gap-1 md:gap-2 w-48 md:w-56 text-sm md:text-base"
-                  style={{ fontFamily: '"Worlds At War", "Fredoka One", cursive' }}
+                  onClick={() => setShowMenu(!showMenu)}
+                  className="hidden md:flex bg-slate-800/90 hover:bg-slate-700 text-white p-3 rounded-xl transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl border border-slate-600/50"
                 >
-                  <span>🏆</span>
-                  <span>Leaderboard</span>
-                  <span className={`transition-transform duration-200 ${showLeaderboard ? 'rotate-180' : ''}`}>▼</span>
+                  <div className="flex flex-col gap-1">
+                    <div className="w-5 h-0.5 bg-white rounded"></div>
+                    <div className="w-5 h-0.5 bg-white rounded"></div>
+                    <div className="w-5 h-0.5 bg-white rounded"></div>
+                  </div>
                 </button>
 
-                {/* Fullscreen Button - Desktop only */}
-                {gameSession && (
-                  <button
-                    onClick={() => setIsFullscreen(true)}
-                    className="hidden md:flex group bg-slate-800/90 hover:bg-slate-700 text-white font-bold py-2 md:py-3 rounded-xl md:rounded-2xl transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl items-center justify-center gap-2 w-48 md:w-56 text-sm md:text-base border border-slate-600/50"
-                    style={{ fontFamily: '"Worlds At War", "Fredoka One", cursive' }}
-                  >
-                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polyline points="15 3 21 3 21 9"></polyline>
-                      <polyline points="9 21 3 21 3 15"></polyline>
-                      <line x1="21" y1="3" x2="14" y2="10"></line>
-                      <line x1="3" y1="21" x2="10" y2="14"></line>
-                    </svg>
-                    <span className="hidden group-hover:inline">Play Fullscreen</span>
-                    <span className="group-hover:hidden">Fullscreen</span>
-                  </button>
+                {/* Dropdown Menu - Desktop only */}
+                {showMenu && (
+                  <div className="hidden md:flex flex-col gap-2">
+                    {/* Leaderboard Toggle */}
+                    <button
+                      onClick={() => setShowLeaderboard(!showLeaderboard)}
+                      className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-bold py-3 rounded-2xl transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl flex items-center justify-center gap-2 w-56"
+                      style={{ fontFamily: '"Worlds At War", "Fredoka One", cursive' }}
+                    >
+                      <span>🏆</span>
+                      <span>Leaderboard</span>
+                      <span className={`transition-transform duration-200 ${showLeaderboard ? 'rotate-180' : ''}`}>▼</span>
+                    </button>
+
+                    {/* Fullscreen Button */}
+                    {gameSession && (
+                      <button
+                        onClick={() => setIsFullscreen(true)}
+                        className="bg-slate-800/90 hover:bg-slate-700 text-white font-bold py-3 rounded-2xl transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl flex items-center justify-center gap-2 w-56 border border-slate-600/50"
+                        style={{ fontFamily: '"Worlds At War", "Fredoka One", cursive' }}
+                      >
+                        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                          <polyline points="15 3 21 3 21 9"></polyline>
+                          <polyline points="9 21 3 21 3 15"></polyline>
+                          <line x1="21" y1="3" x2="14" y2="10"></line>
+                          <line x1="3" y1="21" x2="10" y2="14"></line>
+                        </svg>
+                        <span>Fullscreen</span>
+                      </button>
+                    )}
+                  </div>
                 )}
 
                 {/* Collapsible Leaderboard - Desktop only */}
+                {showMenu && (
                 <div className={`hidden md:block overflow-hidden transition-all duration-300 ease-out ${
                   showLeaderboard ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
                 }`}>
@@ -528,6 +546,7 @@ export default function GameClient() {
                     </div>
                   </div>
                 </div>
+                )}
               </>
             )}
           </div>
