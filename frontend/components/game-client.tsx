@@ -201,7 +201,7 @@ export default function GameClient() {
       <div className="min-h-screen w-full relative overflow-hidden bg-slate-900">
         {/* Snowfall effect */}
         <div className="snow-container absolute inset-0 pointer-events-none z-[5]">
-          {[...Array(50)].map((_, i) => (
+          {[...Array(100)].map((_, i) => (
             <div
               key={i}
               className="snowflake absolute text-white opacity-80"
