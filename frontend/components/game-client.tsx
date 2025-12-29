@@ -269,7 +269,7 @@ export default function GameClient() {
                 top: 33% !important;
                 left: 5% !important;
                 width: 90% !important;
-                height: 42% !important;
+                height: 45% !important;
               }
             }
           `}</style>
