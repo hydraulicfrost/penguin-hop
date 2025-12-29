@@ -214,7 +214,7 @@ export default function GameClient() {
                     top: '29%',
                     left: '15%',
                     width: '70%',
-                    height: '48%',
+                    height: '46%',
                     border: 'none',
                     borderRadius: '15px',
                   }}
