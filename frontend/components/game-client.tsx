@@ -203,33 +203,46 @@ export default function GameClient() {
           {/* Game iframe - behind the TV (or fullscreen) */}
           {gameSession && (
             <>
-              <iframe
-                src={`https://coco-and-bridge.marketjs-cloud2.com/en/coco-and-bridge-penguin-hop/1756889184732/index.html?tournament_id=${gameSession.tournament_id}&user_id=${gameSession.user_id}&game_id=${gameSession.game_id}`}
-                title="Penguin Hop Game"
-                className={`absolute border-none ${
-                  isFullscreen 
-                    ? 'z-[100] rounded-xl' 
-                    : 'z-[1] rounded-2xl normal-iframe'
-                }`}
-                style={isFullscreen ? {
-                  top: '5%',
-                  left: '5%',
-                  width: '90%',
-                  height: '90%',
-                } : {
-                  top: '33%',
-                  left: '15%',
-                  width: '70%',
-                  height: '44%',
-                }}
-              />
-              
-              {/* Fullscreen backdrop - click to exit */}
-              {isFullscreen && (
-                <div 
-                  className="absolute inset-0 bg-slate-900/95 z-[99] cursor-pointer"
-                  onClick={() => setIsFullscreen(false)}
+              {/* Normal view - inside TV */}
+              {!isFullscreen && (
+                <iframe
+                  src={`https://coco-and-bridge.marketjs-cloud2.com/en/coco-and-bridge-penguin-hop/1756889184732/index.html?tournament_id=${gameSession.tournament_id}&user_id=${gameSession.user_id}&game_id=${gameSession.game_id}`}
+                  title="Penguin Hop Game"
+                  style={{
+                    position: 'absolute',
+                    zIndex: 1,
+                    top: '33%',
+                    left: '15%',
+                    width: '70%',
+                    height: '44%',
+                    border: 'none',
+                    borderRadius: '15px',
+                  }}
                 />
+              )}
+              
+              {/* Fullscreen view */}
+              {isFullscreen && (
+                <>
+                  <div 
+                    className="absolute inset-0 bg-slate-900/95 z-[99] cursor-pointer"
+                    onClick={() => setIsFullscreen(false)}
+                  />
+                  <iframe
+                    src={`https://coco-and-bridge.marketjs-cloud2.com/en/coco-and-bridge-penguin-hop/1756889184732/index.html?tournament_id=${gameSession.tournament_id}&user_id=${gameSession.user_id}&game_id=${gameSession.game_id}`}
+                    title="Penguin Hop Game"
+                    style={{
+                      position: 'absolute',
+                      zIndex: 100,
+                      top: '5%',
+                      left: '5%',
+                      width: '90%',
+                      height: '90%',
+                      border: 'none',
+                      borderRadius: '12px',
+                    }}
+                  />
+                </>
               )}
             </>
           )}
@@ -248,27 +261,6 @@ export default function GameClient() {
             }}
           />
 
-          {/* Mobile-specific adjustments - only for normal (non-fullscreen) mode */}
-          <style jsx>{`
-            @media (max-width: 767px) {
-              .normal-iframe {
-                top: 35% !important;
-                left: 17% !important;
-                width: 51% !important;
-                height: 30% !important;
-                border-radius: 8px !important;
-              }
-            }
-            
-            @media (max-width: 767px) and (orientation: landscape) {
-              .normal-iframe {
-                top: 28% !important;
-                left: 22% !important;
-                width: 42% !important;
-                height: 48% !important;
-              }
-            }
-          `}</style>
 
           {/* Top Panel - Responsive positioning */}
           <div className="absolute top-2 right-2 md:top-6 md:right-8 z-30 flex flex-col items-end gap-2">
