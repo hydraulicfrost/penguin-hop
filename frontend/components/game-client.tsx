@@ -1,5 +1,6 @@
 'use client'
 
+// Updated: Username/password authentication system
 import { useState, useEffect, useRef } from 'react'
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001'
@@ -68,6 +69,7 @@ export default function GameClient() {
       if (wsRef.current) {
         wsRef.current.close()
       }
+      
     }
   }, [user, token])
 
