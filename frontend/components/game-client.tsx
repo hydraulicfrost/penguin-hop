@@ -206,7 +206,7 @@ export default function GameClient() {
               <iframe
                 src={`https://coco-and-bridge.marketjs-cloud2.com/en/coco-and-bridge-penguin-hop/1756889184732/index.html?tournament_id=${gameSession.tournament_id}&user_id=${gameSession.user_id}&game_id=${gameSession.game_id}`}
                 title="Penguin Hop Game"
-                className={`absolute border-none transition-all duration-300 ${
+                className={`absolute border-none ${
                   isFullscreen 
                     ? 'z-[100] rounded-xl' 
                     : 'z-[1] rounded-2xl normal-iframe'
