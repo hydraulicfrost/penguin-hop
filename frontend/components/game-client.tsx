@@ -224,12 +224,19 @@ export default function GameClient() {
                 }}
               />
               
-              {/* Fullscreen toggle button */}
+              {/* Fullscreen toggle button - overlayed on game */}
               <button
                 onClick={() => setIsFullscreen(!isFullscreen)}
-                className={`absolute transition-all duration-300 bg-slate-800/80 hover:bg-slate-700 text-white rounded-lg p-2 backdrop-blur-sm border border-slate-600/50 ${
-                  isFullscreen ? 'z-[101] top-2 right-2' : 'z-[3] top-[35%] right-[16%]'
-                }`}
+                className="fullscreen-btn absolute transition-all duration-300 bg-slate-900/70 hover:bg-slate-800 text-white rounded-lg p-1.5 md:p-2 backdrop-blur-sm border border-white/20 hover:border-white/40"
+                style={isFullscreen ? {
+                  zIndex: 101,
+                  top: '6%',
+                  right: '6%',
+                } : {
+                  zIndex: 3,
+                  top: '34%',
+                  right: '16%',
+                }}
                 title={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
               >
                 {isFullscreen ? (
@@ -296,6 +303,11 @@ export default function GameClient() {
                 margin-top: 0 !important;
                 aspect-ratio: auto !important;
               }
+              
+              .fullscreen-btn {
+                top: 36% !important;
+                right: 25% !important;
+              }
             }
             
             @media (max-width: 767px) and (orientation: landscape) {
@@ -317,6 +329,11 @@ export default function GameClient() {
                 transform: none !important;
                 margin-top: 0 !important;
                 aspect-ratio: auto !important;
+              }
+              
+              .fullscreen-btn {
+                top: 30% !important;
+                right: 28% !important;
               }
             }
           `}</style>
