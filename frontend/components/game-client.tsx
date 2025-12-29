@@ -206,19 +206,19 @@ export default function GameClient() {
               title="Penguin Hop Game"
               className="absolute z-[1] border-none rounded-lg md:rounded-2xl"
               style={{
-                top: '20%',
-                left: '5%',
-                width: '90%',
-                height: '55%',
+                top: '28%',
+                left: '15%',
+                width: '70%',
+                height: '44%',
               }}
             />
           )}
           
-          {/* TV Frame - Hidden on mobile for better game visibility */}
+          {/* TV Frame - Show on all screen sizes */}
           <img 
             src="/tv-background.png"
             alt="TV"
-            className="pointer-events-none hidden md:block"
+            className="pointer-events-none"
             style={{ 
               position: 'relative', 
               zIndex: 2,
@@ -227,18 +227,6 @@ export default function GameClient() {
               objectFit: 'cover',
             }}
           />
-
-          {/* Mobile/Tablet: Adjust iframe position when TV is hidden */}
-          <style jsx>{`
-            @media (min-width: 768px) {
-              iframe {
-                top: 28% !important;
-                left: 15% !important;
-                width: 70% !important;
-                height: 44% !important;
-              }
-            }
-          `}</style>
 
           {/* Top Panel - Responsive positioning */}
           <div className="absolute top-2 right-2 md:top-6 md:right-8 z-30 flex flex-col items-end gap-2">
