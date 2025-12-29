@@ -199,14 +199,6 @@ export default function GameClient() {
         rel="stylesheet" 
       />
       
-      <style jsx global>{`
-        @font-face {
-          font-family: 'Worlds At War';
-          src: url('/fonts/worldsatwar.otf') format('opentype');
-          font-weight: normal;
-          font-style: normal;
-        }
-      `}</style>
       
       <div className="min-h-screen w-full relative overflow-hidden bg-slate-900">
         {/* Snowfall effect */}
