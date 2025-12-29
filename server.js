@@ -17,17 +17,27 @@ const app = express();
 
 // CORS configuration
 app.use(cors({
-  origin: [
-    'http://localhost:5500', 
-    'http://127.0.0.1:5500', 
-    'http://localhost:3001',  
-    'http://127.0.0.1:3001',  
-    'http://localhost:3000',  
-    'http://127.0.0.1:3000',
-    'https://penguin-hop.vercel.app',
-    'https://penguin-hop-frontend.vercel.app',
-    'https://coco-and-bridge.marketjs-cloud2.com'
-  ],
+  origin: function (origin, callback) {
+    // Allow requests with no origin (mobile apps, curl, etc)
+    if (!origin) return callback(null, true);
+    
+    const allowedOrigins = [
+      'http://localhost:5500', 
+      'http://127.0.0.1:5500', 
+      'http://localhost:3001',  
+      'http://127.0.0.1:3001',  
+      'http://localhost:3000',  
+      'http://127.0.0.1:3000',
+      'https://coco-and-bridge.marketjs-cloud2.com'
+    ];
+    
+    // Allow all Vercel deployments
+    if (origin.endsWith('.vercel.app') || allowedOrigins.includes(origin)) {
+      return callback(null, true);
+    }
+    
+    callback(new Error('Not allowed by CORS'));
+  },
   credentials: true
 }));
 
