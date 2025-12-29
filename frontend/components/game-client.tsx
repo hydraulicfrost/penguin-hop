@@ -201,7 +201,7 @@ export default function GameClient() {
       <style jsx global>{`
         @font-face {
           font-family: 'Worlds At War';
-          src: url('/fonts/worldsatwar.ttf') format('truetype');
+          src: url('/fonts/worldsatwar.otf') format('opentype');
           font-weight: normal;
           font-style: normal;
         }
