@@ -208,6 +208,7 @@ export default function GameClient() {
                 <iframe
                   src={`https://coco-and-bridge.marketjs-cloud2.com/en/coco-and-bridge-penguin-hop/1756889184732/index.html?tournament_id=${gameSession.tournament_id}&user_id=${gameSession.user_id}&game_id=${gameSession.game_id}`}
                   title="Penguin Hop Game"
+                  className="game-iframe-normal"
                   style={{
                     position: 'absolute',
                     zIndex: 1,
@@ -260,6 +261,16 @@ export default function GameClient() {
               objectFit: 'cover',
             }}
           />
+
+          {/* Mobile-specific: wider iframe */}
+          <style jsx>{`
+            @media (max-width: 767px) {
+              .game-iframe-normal {
+                left: 5% !important;
+                width: 90% !important;
+              }
+            }
+          `}</style>
 
 
           {/* Top Panel - Responsive positioning */}
