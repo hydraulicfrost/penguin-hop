@@ -227,7 +227,7 @@ export default function GameClient() {
                 <div 
                   className="md:hidden absolute z-[1] flex items-center justify-center cursor-pointer bg-slate-900 rounded-xl"
                   style={{
-                    top: '33%',
+                    top: '28%',
                     left: '5%',
                     width: '90%',
                     height: '45%',
