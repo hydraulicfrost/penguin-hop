@@ -266,6 +266,7 @@ export default function GameClient() {
           <style jsx>{`
             @media (max-width: 767px) {
               .game-iframe-normal {
+                top: 33% !important;
                 left: 5% !important;
                 width: 90% !important;
                 height: 42% !important;
