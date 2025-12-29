@@ -42,6 +42,7 @@ export default function GameClient() {
   const [gameSession, setGameSession] = useState<GameSession | null>(null)
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([])
   const [showLeaderboard, setShowLeaderboard] = useState(false)
+  const [isFullscreen, setIsFullscreen] = useState(false)
   
   const wsRef = useRef<WebSocket | null>(null)
 
@@ -199,19 +200,63 @@ export default function GameClient() {
       <div className="min-h-screen w-full relative overflow-hidden bg-slate-900">
         {/* TV Background Container */}
         <div className="absolute inset-0 flex items-center justify-center">
-          {/* Game iframe - behind the TV */}
+          {/* Game iframe - behind the TV (or fullscreen) */}
           {gameSession && (
-            <iframe
-              src={`https://coco-and-bridge.marketjs-cloud2.com/en/coco-and-bridge-penguin-hop/1756889184732/index.html?tournament_id=${gameSession.tournament_id}&user_id=${gameSession.user_id}&game_id=${gameSession.game_id}`}
-              title="Penguin Hop Game"
-              className="absolute z-[1] border-none rounded-2xl"
-              style={{
-                top: '33%',
-                left: '15%',
-                width: '70%',
-                height: '44%',
-              }}
-            />
+            <>
+              <iframe
+                src={`https://coco-and-bridge.marketjs-cloud2.com/en/coco-and-bridge-penguin-hop/1756889184732/index.html?tournament_id=${gameSession.tournament_id}&user_id=${gameSession.user_id}&game_id=${gameSession.game_id}`}
+                title="Penguin Hop Game"
+                className={`absolute border-none transition-all duration-300 ${
+                  isFullscreen 
+                    ? 'z-[100] rounded-xl fullscreen-iframe' 
+                    : 'z-[1] rounded-2xl normal-iframe'
+                }`}
+                style={isFullscreen ? {
+                  top: '5%',
+                  left: '5%',
+                  width: '90%',
+                  height: '85%',
+                } : {
+                  top: '33%',
+                  left: '15%',
+                  width: '70%',
+                  height: '44%',
+                }}
+              />
+              
+              {/* Fullscreen toggle button */}
+              <button
+                onClick={() => setIsFullscreen(!isFullscreen)}
+                className={`absolute transition-all duration-300 bg-slate-800/80 hover:bg-slate-700 text-white rounded-lg p-2 backdrop-blur-sm border border-slate-600/50 ${
+                  isFullscreen ? 'z-[101] top-2 right-2' : 'z-[3] top-[35%] right-[16%]'
+                }`}
+                title={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
+              >
+                {isFullscreen ? (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="4 14 10 14 10 20"></polyline>
+                    <polyline points="20 10 14 10 14 4"></polyline>
+                    <line x1="14" y1="10" x2="21" y2="3"></line>
+                    <line x1="3" y1="21" x2="10" y2="14"></line>
+                  </svg>
+                ) : (
+                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="15 3 21 3 21 9"></polyline>
+                    <polyline points="9 21 3 21 3 15"></polyline>
+                    <line x1="21" y1="3" x2="14" y2="10"></line>
+                    <line x1="3" y1="21" x2="10" y2="14"></line>
+                  </svg>
+                )}
+              </button>
+              
+              {/* Fullscreen backdrop */}
+              {isFullscreen && (
+                <div 
+                  className="absolute inset-0 bg-slate-900/95 z-[99]"
+                  onClick={() => setIsFullscreen(false)}
+                />
+              )}
+            </>
           )}
           
           {/* TV Frame - Show on all screen sizes */}
@@ -228,10 +273,10 @@ export default function GameClient() {
             }}
           />
 
-          {/* Mobile-specific adjustments */}
+          {/* Mobile-specific adjustments - only for normal (non-fullscreen) mode */}
           <style jsx>{`
             @media (max-width: 767px) {
-              iframe {
+              .normal-iframe {
                 top: 50% !important;
                 left: 50% !important;
                 transform: translate(-50%, -50%) !important;
@@ -241,10 +286,20 @@ export default function GameClient() {
                 border-radius: 8px !important;
                 margin-top: 8% !important;
               }
+              
+              .fullscreen-iframe {
+                top: 2% !important;
+                left: 2% !important;
+                width: 96% !important;
+                height: 90% !important;
+                transform: none !important;
+                margin-top: 0 !important;
+                aspect-ratio: auto !important;
+              }
             }
             
             @media (max-width: 767px) and (orientation: landscape) {
-              iframe {
+              .normal-iframe {
                 top: 50% !important;
                 left: 50% !important;
                 transform: translate(-50%, -50%) !important;
@@ -252,6 +307,16 @@ export default function GameClient() {
                 height: auto !important;
                 aspect-ratio: 4 / 3 !important;
                 margin-top: 5% !important;
+              }
+              
+              .fullscreen-iframe {
+                top: 2% !important;
+                left: 2% !important;
+                width: 96% !important;
+                height: 92% !important;
+                transform: none !important;
+                margin-top: 0 !important;
+                aspect-ratio: auto !important;
               }
             }
           `}</style>
