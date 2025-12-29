@@ -43,6 +43,7 @@ export default function GameClient() {
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([])
   const [showLeaderboard, setShowLeaderboard] = useState(false)
   const [isFullscreen, setIsFullscreen] = useState(false)
+  const [showInfoTooltip, setShowInfoTooltip] = useState(false)
   
   const wsRef = useRef<WebSocket | null>(null)
 
@@ -351,14 +352,24 @@ export default function GameClient() {
             ) : (
               <>
                 {/* Logged in user panel - Responsive */}
-                <div className="flex items-center gap-2">
+                <div className="flex items-center gap-2 relative">
                   {/* Info icon - Mobile only */}
                   <div 
-                    className="md:hidden w-6 h-6 bg-slate-700/90 backdrop-blur-md rounded-full flex items-center justify-center text-slate-300 text-xs cursor-help border border-slate-600/50"
-                    title="Login on desktop to check the leaderboard!"
+                    className="md:hidden w-6 h-6 bg-slate-700/90 backdrop-blur-md rounded-full flex items-center justify-center text-slate-300 text-xs cursor-pointer border border-slate-600/50"
+                    onClick={() => setShowInfoTooltip(!showInfoTooltip)}
                   >
                     i
                   </div>
+                  
+                  {/* Info tooltip - Mobile only */}
+                  {showInfoTooltip && (
+                    <div 
+                      className="md:hidden absolute top-10 right-0 bg-slate-800 text-white text-xs px-3 py-2 rounded-lg shadow-xl border border-slate-600/50 w-48 z-50"
+                      onClick={() => setShowInfoTooltip(false)}
+                    >
+                      Login on desktop to check the leaderboard!
+                    </div>
+                  )}
                   
                   <div className="bg-slate-800/90 backdrop-blur-md rounded-xl md:rounded-2xl px-3 md:px-4 py-2 md:py-3 border border-slate-600/50 flex items-center space-x-2 md:space-x-3 w-48 md:w-56">
                     <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-lg md:rounded-xl flex items-center justify-center text-white font-bold text-sm md:text-lg">
