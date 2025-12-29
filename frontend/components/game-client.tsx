@@ -199,6 +199,40 @@ export default function GameClient() {
       />
       
       <div className="min-h-screen w-full relative overflow-hidden bg-slate-900">
+        {/* Snowfall effect */}
+        <div className="snow-container absolute inset-0 pointer-events-none z-[5]">
+          {[...Array(50)].map((_, i) => (
+            <div
+              key={i}
+              className="snowflake absolute text-white opacity-80"
+              style={{
+                left: `${Math.random() * 100}%`,
+                animationDuration: `${5 + Math.random() * 10}s`,
+                animationDelay: `${Math.random() * 5}s`,
+                fontSize: `${4 + Math.random() * 8}px`,
+              }}
+            >
+              ❄
+            </div>
+          ))}
+        </div>
+        
+        <style jsx>{`
+          @keyframes snowfall {
+            0% {
+              transform: translateY(-10px) rotate(0deg);
+              opacity: 1;
+            }
+            100% {
+              transform: translateY(100vh) rotate(360deg);
+              opacity: 0.3;
+            }
+          }
+          .snowflake {
+            animation: snowfall linear infinite;
+          }
+        `}</style>
+        
         {/* TV Background Container */}
         <div className="absolute inset-0 flex items-center justify-center">
           {/* Game iframe - behind the TV (or fullscreen) */}
