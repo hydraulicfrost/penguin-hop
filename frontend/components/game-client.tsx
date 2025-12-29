@@ -207,8 +207,9 @@ export default function GameClient() {
               className="snowflake absolute text-white opacity-80"
               style={{
                 left: `${Math.random() * 100}%`,
-                animationDuration: `${5 + Math.random() * 10}s`,
-                animationDelay: `${Math.random() * 5}s`,
+                top: `${Math.random() * 100}%`,
+                animationDuration: `${8 + Math.random() * 12}s`,
+                animationDelay: `${-Math.random() * 20}s`,
                 fontSize: `${4 + Math.random() * 8}px`,
               }}
             >
@@ -220,8 +221,8 @@ export default function GameClient() {
         <style jsx>{`
           @keyframes snowfall {
             0% {
-              transform: translateY(-10px) rotate(0deg);
-              opacity: 1;
+              transform: translateY(0) rotate(0deg);
+              opacity: 0.8;
             }
             100% {
               transform: translateY(100vh) rotate(360deg);
