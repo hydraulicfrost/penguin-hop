@@ -370,10 +370,10 @@ export default function GameClient() {
                   </button>
                 </div>
 
-                {/* Leaderboard Toggle - Responsive */}
+                {/* Leaderboard Toggle - Desktop only */}
                 <button
                   onClick={() => setShowLeaderboard(!showLeaderboard)}
-                  className="bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-bold py-2 md:py-3 rounded-xl md:rounded-2xl transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl flex items-center justify-center gap-1 md:gap-2 w-48 md:w-56 text-sm md:text-base"
+                  className="hidden md:flex bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-bold py-2 md:py-3 rounded-xl md:rounded-2xl transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl items-center justify-center gap-1 md:gap-2 w-48 md:w-56 text-sm md:text-base"
                   style={{ fontFamily: '"Fredoka One", cursive' }}
                 >
                   <span>🏆</span>
@@ -399,9 +399,9 @@ export default function GameClient() {
                   </button>
                 )}
 
-                {/* Collapsible Leaderboard - Responsive */}
-                <div className={`overflow-hidden transition-all duration-300 ease-out ${
-                  showLeaderboard ? 'max-h-[400px] md:max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+                {/* Collapsible Leaderboard - Desktop only */}
+                <div className={`hidden md:block overflow-hidden transition-all duration-300 ease-out ${
+                  showLeaderboard ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
                 }`}>
                   <div className="bg-slate-900/95 backdrop-blur-md rounded-xl md:rounded-2xl border border-slate-700/50 shadow-2xl w-48 md:w-56">
                     {/* Your Stats */}
