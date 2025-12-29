@@ -28,7 +28,9 @@ app.use(cors({
       'http://127.0.0.1:3001',  
       'http://localhost:3000',  
       'http://127.0.0.1:3000',
-      'https://coco-and-bridge.marketjs-cloud2.com'
+      'https://coco-and-bridge.marketjs-cloud2.com',
+      'https://validator.marketjs-cloud.com',
+      'http://164.92.196.60'
     ];
     
     // Allow all Vercel deployments
