@@ -204,7 +204,13 @@ export default function GameClient() {
             <iframe
               src={`https://coco-and-bridge.marketjs-cloud2.com/en/coco-and-bridge-penguin-hop/1756889184732/index.html?tournament_id=${gameSession.tournament_id}&user_id=${gameSession.user_id}&game_id=${gameSession.game_id}`}
               title="Penguin Hop Game"
-              className="absolute z-[1] border-none game-iframe"
+              className="absolute z-[1] border-none rounded-2xl"
+              style={{
+                top: '33%',
+                left: '15%',
+                width: '70%',
+                height: '44%',
+              }}
             />
           )}
           
@@ -222,35 +228,24 @@ export default function GameClient() {
             }}
           />
 
-          {/* Responsive iframe positioning */}
+          {/* Mobile-specific adjustments */}
           <style jsx>{`
-            .game-iframe {
-              /* Mobile portrait - TV screen area */
-              top: 34%;
-              left: 17%;
-              width: 51%;
-              height: 28%;
-              border-radius: 8px;
-            }
-            
-            @media (min-width: 768px) {
-              .game-iframe {
-                /* Desktop - TV screen area */
-                top: 31%;
-                left: 15%;
-                width: 70%;
-                height: 44%;
-                border-radius: 12px;
+            @media (max-width: 767px) {
+              iframe {
+                top: 34% !important;
+                left: 17% !important;
+                width: 51% !important;
+                height: 28% !important;
+                border-radius: 8px !important;
               }
             }
             
             @media (max-width: 767px) and (orientation: landscape) {
-              .game-iframe {
-                /* Mobile landscape */
-                top: 28%;
-                left: 22%;
-                width: 42%;
-                height: 45%;
+              iframe {
+                top: 28% !important;
+                left: 22% !important;
+                width: 42% !important;
+                height: 45% !important;
               }
             }
           `}</style>
