@@ -198,6 +198,15 @@ export default function GameClient() {
         rel="stylesheet" 
       />
       
+      <style jsx global>{`
+        @font-face {
+          font-family: 'Worlds At War';
+          src: url('/fonts/worldsatwar.ttf') format('truetype');
+          font-weight: normal;
+          font-style: normal;
+        }
+      `}</style>
+      
       <div className="min-h-screen w-full relative overflow-hidden bg-slate-900">
         {/* Snowfall effect */}
         <div className="snow-container absolute inset-0 pointer-events-none z-[10]">
@@ -276,7 +285,7 @@ export default function GameClient() {
                         <polygon points="5 3 19 12 5 21 5 3"></polygon>
                       </svg>
                     </div>
-                    <p className="text-white font-bold text-lg" style={{ fontFamily: '"Fredoka One", cursive' }}>
+                    <p className="text-white font-bold text-lg" style={{ fontFamily: '"Worlds At War", "Fredoka One", cursive' }}>
                       Tap to Play
                     </p>
                   </div>
@@ -332,7 +341,7 @@ export default function GameClient() {
               <div className="bg-slate-800/95 backdrop-blur-md rounded-xl md:rounded-2xl p-3 md:p-5 border border-slate-600/50 shadow-2xl w-64 md:w-72">
                 <h2 
                   className="text-white text-lg md:text-xl font-bold mb-3 md:mb-4 text-center"
-                  style={{ fontFamily: '"Fredoka One", cursive' }}
+                  style={{ fontFamily: '"Worlds At War", "Fredoka One", cursive' }}
                 >
                   {authMode === 'login' ? 'Welcome Back!' : 'Join the Fun!'}
                 </h2>
@@ -344,7 +353,7 @@ export default function GameClient() {
                     value={username}
                     onChange={(e) => setUsername(e.target.value)}
                     className="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg md:rounded-xl bg-slate-700/50 border border-slate-600 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm md:text-base"
-                    style={{ fontFamily: '"Nunito", sans-serif' }}
+                    style={{ fontFamily: '"Worlds At War", "Nunito", sans-serif' }}
                     required
                   />
                   <input
@@ -353,7 +362,7 @@ export default function GameClient() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     className="w-full px-3 md:px-4 py-2 md:py-3 rounded-lg md:rounded-xl bg-slate-700/50 border border-slate-600 text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 text-sm md:text-base"
-                    style={{ fontFamily: '"Nunito", sans-serif' }}
+                    style={{ fontFamily: '"Worlds At War", "Nunito", sans-serif' }}
                     required
                   />
                   
@@ -365,13 +374,13 @@ export default function GameClient() {
                     type="submit"
                     disabled={isSubmitting}
                     className="w-full py-2 md:py-3 rounded-lg md:rounded-xl bg-gradient-to-r from-cyan-500 to-blue-500 hover:from-cyan-600 hover:to-blue-600 text-white font-bold transition-all duration-200 transform hover:scale-105 active:scale-95 disabled:opacity-50 text-sm md:text-base"
-                    style={{ fontFamily: '"Fredoka One", cursive' }}
+                    style={{ fontFamily: '"Worlds At War", "Fredoka One", cursive' }}
                   >
                     {isSubmitting ? '...' : (authMode === 'login' ? 'Play!' : 'Sign Up')}
                   </button>
                 </form>
                 
-                <p className="text-slate-400 text-xs md:text-sm text-center mt-3 md:mt-4" style={{ fontFamily: '"Nunito", sans-serif' }}>
+                <p className="text-slate-400 text-xs md:text-sm text-center mt-3 md:mt-4" style={{ fontFamily: '"Worlds At War", "Nunito", sans-serif' }}>
                   {authMode === 'login' ? "Don't have an account? " : "Already have an account? "}
                   <button
                     onClick={() => {
@@ -412,7 +421,7 @@ export default function GameClient() {
                     </div>
                     <div className="flex-1 min-w-0">
                       <p className="text-[10px] md:text-xs text-slate-400">Playing as</p>
-                      <p className="text-white font-bold text-xs md:text-sm truncate" style={{ fontFamily: '"Fredoka One", cursive' }}>
+                      <p className="text-white font-bold text-xs md:text-sm truncate" style={{ fontFamily: '"Worlds At War", "Fredoka One", cursive' }}>
                         {user.username}
                       </p>
                     </div>
@@ -430,7 +439,7 @@ export default function GameClient() {
                 <button
                   onClick={() => setShowLeaderboard(!showLeaderboard)}
                   className="hidden md:flex bg-gradient-to-r from-yellow-500 to-orange-500 hover:from-yellow-600 hover:to-orange-600 text-white font-bold py-2 md:py-3 rounded-xl md:rounded-2xl transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl items-center justify-center gap-1 md:gap-2 w-48 md:w-56 text-sm md:text-base"
-                  style={{ fontFamily: '"Fredoka One", cursive' }}
+                  style={{ fontFamily: '"Worlds At War", "Fredoka One", cursive' }}
                 >
                   <span>🏆</span>
                   <span>Leaderboard</span>
@@ -442,7 +451,7 @@ export default function GameClient() {
                   <button
                     onClick={() => setIsFullscreen(true)}
                     className="hidden md:flex group bg-slate-800/90 hover:bg-slate-700 text-white font-bold py-2 md:py-3 rounded-xl md:rounded-2xl transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl items-center justify-center gap-2 w-48 md:w-56 text-sm md:text-base border border-slate-600/50"
-                    style={{ fontFamily: '"Fredoka One", cursive' }}
+                    style={{ fontFamily: '"Worlds At War", "Fredoka One", cursive' }}
                   >
                     <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <polyline points="15 3 21 3 21 9"></polyline>
@@ -464,11 +473,11 @@ export default function GameClient() {
                     <div className="bg-slate-800/50 px-3 md:px-4 py-2 md:py-3 border-b border-slate-700/50 rounded-t-xl md:rounded-t-2xl">
                       <p className="text-slate-400 text-[10px] md:text-xs uppercase tracking-wide mb-1">Your Stats</p>
                       <div className="flex justify-between items-center">
-                        <p className="text-white font-bold text-xs md:text-sm" style={{ fontFamily: '"Fredoka One", cursive' }}>
+                        <p className="text-white font-bold text-xs md:text-sm" style={{ fontFamily: '"Worlds At War", "Fredoka One", cursive' }}>
                           {userStats.rank ? `Rank #${userStats.rank}` : 'Unranked'}
                         </p>
                         <div className="text-right">
-                          <p className="text-yellow-400 font-bold text-base md:text-lg" style={{ fontFamily: '"Fredoka One", cursive' }}>
+                          <p className="text-yellow-400 font-bold text-base md:text-lg" style={{ fontFamily: '"Worlds At War", "Fredoka One", cursive' }}>
                             {userStats.highScore?.toLocaleString() || '-'}
                           </p>
                         </div>
@@ -529,13 +538,13 @@ export default function GameClient() {
               <div className="text-center px-4">
                 <h1 
                   className="text-3xl md:text-5xl font-bold text-white mb-2 md:mb-4 drop-shadow-lg"
-                  style={{ fontFamily: '"Fredoka One", cursive' }}
+                  style={{ fontFamily: '"Worlds At War", "Fredoka One", cursive' }}
                 >
                   Penguin Hop
                 </h1>
                 <p 
                   className="text-base md:text-xl text-cyan-200"
-                  style={{ fontFamily: '"Nunito", sans-serif' }}
+                  style={{ fontFamily: '"Worlds At War", "Nunito", sans-serif' }}
                 >
                   Sign in to start playing!
                 </p>
