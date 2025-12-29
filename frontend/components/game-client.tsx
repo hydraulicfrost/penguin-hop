@@ -236,7 +236,7 @@ export default function GameClient() {
             @media (min-width: 768px) {
               .game-iframe {
                 /* Desktop - TV screen area */
-                top: 30%;
+                top: 28%;
                 left: 15%;
                 width: 70%;
                 height: 44%;
