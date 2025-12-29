@@ -232,20 +232,26 @@ export default function GameClient() {
           <style jsx>{`
             @media (max-width: 767px) {
               iframe {
-                top: 34% !important;
-                left: 17% !important;
-                width: 51% !important;
-                height: 28% !important;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) !important;
+                width: 52% !important;
+                height: auto !important;
+                aspect-ratio: 4 / 3 !important;
                 border-radius: 8px !important;
+                margin-top: 8% !important;
               }
             }
             
             @media (max-width: 767px) and (orientation: landscape) {
               iframe {
-                top: 28% !important;
-                left: 22% !important;
-                width: 42% !important;
-                height: 45% !important;
+                top: 50% !important;
+                left: 50% !important;
+                transform: translate(-50%, -50%) !important;
+                width: 45% !important;
+                height: auto !important;
+                aspect-ratio: 4 / 3 !important;
+                margin-top: 5% !important;
               }
             }
           `}</style>
