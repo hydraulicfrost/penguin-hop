@@ -203,12 +203,12 @@ export default function GameClient() {
           {/* Game iframe - behind the TV (or fullscreen) */}
           {gameSession && (
             <>
-              {/* Normal view - inside TV */}
+              {/* Desktop: Normal view - inside TV */}
               {!isFullscreen && (
                 <iframe
                   src={`https://coco-and-bridge.marketjs-cloud2.com/en/coco-and-bridge-penguin-hop/1756889184732/index.html?tournament_id=${gameSession.tournament_id}&user_id=${gameSession.user_id}&game_id=${gameSession.game_id}`}
                   title="Penguin Hop Game"
-                  className="game-iframe-normal"
+                  className="game-iframe-normal hidden md:block"
                   style={{
                     position: 'absolute',
                     zIndex: 1,
@@ -220,6 +220,31 @@ export default function GameClient() {
                     borderRadius: '15px',
                   }}
                 />
+              )}
+              
+              {/* Mobile: Black screen with play button */}
+              {!isFullscreen && (
+                <div 
+                  className="md:hidden absolute z-[1] flex items-center justify-center cursor-pointer bg-slate-900 rounded-xl"
+                  style={{
+                    top: '33%',
+                    left: '5%',
+                    width: '90%',
+                    height: '45%',
+                  }}
+                  onClick={() => setIsFullscreen(true)}
+                >
+                  <div className="flex flex-col items-center gap-3">
+                    <div className="w-20 h-20 bg-white/20 rounded-full flex items-center justify-center hover:bg-white/30 transition-colors">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 24 24" fill="white">
+                        <polygon points="5 3 19 12 5 21 5 3"></polygon>
+                      </svg>
+                    </div>
+                    <p className="text-white font-bold text-lg" style={{ fontFamily: '"Fredoka One", cursive' }}>
+                      Tap to Play
+                    </p>
+                  </div>
+                </div>
               )}
               
               {/* Fullscreen view */}
@@ -262,17 +287,6 @@ export default function GameClient() {
             }}
           />
 
-          {/* Mobile-specific: wider iframe, slightly less height */}
-          <style jsx>{`
-            @media (max-width: 767px) {
-              .game-iframe-normal {
-                top: 33% !important;
-                left: 5% !important;
-                width: 90% !important;
-                height: 45% !important;
-              }
-            }
-          `}</style>
 
 
           {/* Top Panel - Responsive positioning */}
