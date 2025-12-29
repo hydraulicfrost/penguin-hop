@@ -232,7 +232,7 @@ export default function GameClient() {
           <style jsx>{`
             @media (min-width: 768px) {
               iframe {
-                top: 33% !important;
+                top: 28% !important;
                 left: 15% !important;
                 width: 70% !important;
                 height: 44% !important;
