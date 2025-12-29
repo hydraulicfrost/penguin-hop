@@ -351,30 +351,33 @@ export default function GameClient() {
             ) : (
               <>
                 {/* Logged in user panel - Responsive */}
-                <div className="bg-slate-800/90 backdrop-blur-md rounded-xl md:rounded-2xl px-3 md:px-4 py-2 md:py-3 border border-slate-600/50 flex items-center space-x-2 md:space-x-3 w-48 md:w-56">
-                  <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-lg md:rounded-xl flex items-center justify-center text-white font-bold text-sm md:text-lg">
-                    {user.username[0].toUpperCase()}
-                  </div>
-                  <div className="flex-1 min-w-0">
-                    <p className="text-[10px] md:text-xs text-slate-400">Playing as</p>
-                    <p className="text-white font-bold text-xs md:text-sm truncate" style={{ fontFamily: '"Fredoka One", cursive' }}>
-                      {user.username}
-                    </p>
-                  </div>
+                <div className="flex items-center gap-2">
                   {/* Info icon - Mobile only */}
                   <div 
-                    className="md:hidden w-5 h-5 bg-slate-600/50 rounded-full flex items-center justify-center text-slate-300 text-xs cursor-help flex-shrink-0"
+                    className="md:hidden w-6 h-6 bg-slate-700/90 backdrop-blur-md rounded-full flex items-center justify-center text-slate-300 text-xs cursor-help border border-slate-600/50"
                     title="Login on desktop to check the leaderboard!"
                   >
                     i
                   </div>
-                  <button 
-                    onClick={logout}
-                    className="text-slate-400 hover:text-red-400 text-base md:text-lg flex-shrink-0"
-                    title="Logout"
-                  >
-                    ✕
-                  </button>
+                  
+                  <div className="bg-slate-800/90 backdrop-blur-md rounded-xl md:rounded-2xl px-3 md:px-4 py-2 md:py-3 border border-slate-600/50 flex items-center space-x-2 md:space-x-3 w-48 md:w-56">
+                    <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-cyan-500 to-blue-500 rounded-lg md:rounded-xl flex items-center justify-center text-white font-bold text-sm md:text-lg">
+                      {user.username[0].toUpperCase()}
+                    </div>
+                    <div className="flex-1 min-w-0">
+                      <p className="text-[10px] md:text-xs text-slate-400">Playing as</p>
+                      <p className="text-white font-bold text-xs md:text-sm truncate" style={{ fontFamily: '"Fredoka One", cursive' }}>
+                        {user.username}
+                      </p>
+                    </div>
+                    <button 
+                      onClick={logout}
+                      className="text-slate-400 hover:text-red-400 text-base md:text-lg flex-shrink-0"
+                      title="Logout"
+                    >
+                      ✕
+                    </button>
+                  </div>
                 </div>
 
                 {/* Leaderboard Toggle - Desktop only */}
