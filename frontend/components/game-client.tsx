@@ -200,7 +200,7 @@ export default function GameClient() {
       
       <div className="min-h-screen w-full relative overflow-hidden bg-slate-900">
         {/* Snowfall effect */}
-        <div className="snow-container absolute inset-0 pointer-events-none z-[5]">
+        <div className="snow-container absolute inset-0 pointer-events-none z-[10]">
           {[...Array(100)].map((_, i) => (
             <div
               key={i}
