@@ -1,6 +1,6 @@
 'use client'
 
-// Updated: Username/password authentication system
+// Username/password authentication system - v2.0
 import { useState, useEffect, useRef } from 'react'
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:3001'
