@@ -208,14 +208,14 @@ export default function GameClient() {
                 title="Penguin Hop Game"
                 className={`absolute border-none transition-all duration-300 ${
                   isFullscreen 
-                    ? 'z-[100] rounded-xl fullscreen-iframe' 
+                    ? 'z-[100] rounded-xl' 
                     : 'z-[1] rounded-2xl normal-iframe'
                 }`}
                 style={isFullscreen ? {
                   top: '5%',
                   left: '5%',
                   width: '90%',
-                  height: '85%',
+                  height: '90%',
                 } : {
                   top: '33%',
                   left: '15%',
@@ -224,42 +224,10 @@ export default function GameClient() {
                 }}
               />
               
-              {/* Fullscreen toggle button - overlayed on game */}
-              <button
-                onClick={() => setIsFullscreen(!isFullscreen)}
-                className="fullscreen-btn absolute transition-all duration-300 bg-slate-900/70 hover:bg-slate-800 text-white rounded-lg p-1.5 md:p-2 backdrop-blur-sm border border-white/20 hover:border-white/40"
-                style={isFullscreen ? {
-                  zIndex: 101,
-                  top: '6%',
-                  right: '6%',
-                } : {
-                  zIndex: 3,
-                  top: '34%',
-                  right: '16%',
-                }}
-                title={isFullscreen ? 'Exit fullscreen' : 'Fullscreen'}
-              >
-                {isFullscreen ? (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="4 14 10 14 10 20"></polyline>
-                    <polyline points="20 10 14 10 14 4"></polyline>
-                    <line x1="14" y1="10" x2="21" y2="3"></line>
-                    <line x1="3" y1="21" x2="10" y2="14"></line>
-                  </svg>
-                ) : (
-                  <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                    <polyline points="15 3 21 3 21 9"></polyline>
-                    <polyline points="9 21 3 21 3 15"></polyline>
-                    <line x1="21" y1="3" x2="14" y2="10"></line>
-                    <line x1="3" y1="21" x2="10" y2="14"></line>
-                  </svg>
-                )}
-              </button>
-              
-              {/* Fullscreen backdrop */}
+              {/* Fullscreen backdrop - click to exit */}
               {isFullscreen && (
                 <div 
-                  className="absolute inset-0 bg-slate-900/95 z-[99]"
+                  className="absolute inset-0 bg-slate-900/95 z-[99] cursor-pointer"
                   onClick={() => setIsFullscreen(false)}
                 />
               )}
@@ -293,21 +261,6 @@ export default function GameClient() {
                 border-radius: 8px !important;
                 margin-top: 8% !important;
               }
-              
-              .fullscreen-iframe {
-                top: 2% !important;
-                left: 2% !important;
-                width: 96% !important;
-                height: 90% !important;
-                transform: none !important;
-                margin-top: 0 !important;
-                aspect-ratio: auto !important;
-              }
-              
-              .fullscreen-btn {
-                top: 36% !important;
-                right: 25% !important;
-              }
             }
             
             @media (max-width: 767px) and (orientation: landscape) {
@@ -319,21 +272,6 @@ export default function GameClient() {
                 height: auto !important;
                 aspect-ratio: 4 / 3 !important;
                 margin-top: 5% !important;
-              }
-              
-              .fullscreen-iframe {
-                top: 2% !important;
-                left: 2% !important;
-                width: 96% !important;
-                height: 92% !important;
-                transform: none !important;
-                margin-top: 0 !important;
-                aspect-ratio: auto !important;
-              }
-              
-              .fullscreen-btn {
-                top: 30% !important;
-                right: 28% !important;
               }
             }
           `}</style>
@@ -429,6 +367,24 @@ export default function GameClient() {
                   <span>Leaderboard</span>
                   <span className={`transition-transform duration-200 ${showLeaderboard ? 'rotate-180' : ''}`}>▼</span>
                 </button>
+
+                {/* Fullscreen Button */}
+                {gameSession && (
+                  <button
+                    onClick={() => setIsFullscreen(true)}
+                    className="group bg-slate-800/90 hover:bg-slate-700 text-white font-bold py-2 md:py-3 rounded-xl md:rounded-2xl transition-all duration-200 transform hover:scale-105 active:scale-95 shadow-xl flex items-center justify-center gap-2 w-48 md:w-56 text-sm md:text-base border border-slate-600/50"
+                    style={{ fontFamily: '"Fredoka One", cursive' }}
+                  >
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <polyline points="9 21 3 21 3 15"></polyline>
+                      <line x1="21" y1="3" x2="14" y2="10"></line>
+                      <line x1="3" y1="21" x2="10" y2="14"></line>
+                    </svg>
+                    <span className="hidden group-hover:inline">Play Fullscreen</span>
+                    <span className="group-hover:hidden">Fullscreen</span>
+                  </button>
+                )}
 
                 {/* Collapsible Leaderboard - Responsive */}
                 <div className={`overflow-hidden transition-all duration-300 ease-out ${
