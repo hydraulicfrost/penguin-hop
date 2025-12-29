@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
-  }
+  },
   "dependencies": {
     "@abstract-foundation/agw-client": "^1.9.1",
     "@abstract-foundation/agw-react": "^1.9.1",
@@ -22,7 +22,7 @@
     "tailwind-merge": "^3.3.1",
     "viem": "^2.37.5",
     "wagmi": "^2.16.9"
-  }
+  },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
